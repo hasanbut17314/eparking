@@ -39,7 +39,7 @@
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
 	  						
-							  <form class="request-form ftco-animate bg-primary" action="<?php echo BASE_URL.'front/checkBookDetails'?>" style="width: 100%;background: #fff !important;" enctype="multipart/form-data" method="post">
+							  <form class="request-form ftco-animate bg-primary" action="<?php echo 'front/checkBookDetails'?>" style="width: 100%;background: #fff !important;" enctype="multipart/form-data" method="post">
 		          		<h2 style="color: #1f1f1f;">Find Your Parking</h2>
 			    				<div class="form-group">
 			    					<label for="" class="label" style="color: #1f1f1f;">Choose Parking Location</label>

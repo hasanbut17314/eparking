@@ -33,7 +33,7 @@ foreach ($orderData as $key => $value) {
                    Booking Status: <span class="dt_font_family">
 
                   
-                                       <?php if($value->payment_status == 0){ ?>
+                                       <?php if($value->order_status == 0){ ?>
                                  <button class="btn btn-warning" style="font-weight: bold;padding: 4px 3px !important;padding-top: 3px !important;border-radius: 14px;color:#fff;">Pending</button>
                                  
                                           <?php } else{ ?>
@@ -99,7 +99,7 @@ foreach ($orderData as $key => $value) {
 
                         <span class="orderprotitle">
 
-                           <div class="row">
+                           <div class="row ml-5">
 
                               <div class="col-md-6">
 
@@ -115,7 +115,7 @@ foreach ($orderData as $key => $value) {
                                <p><span><b>Amount :</b> £<?= round($value->amount)?> </span></p>
                                <div>
 
-                                    <button class="addFeedBack btn btn-success" data-id="<?= $value->id?>">Feedback</button>
+                                    <button class="addFeedBack btn btn-success" data-id="<?= $value->id?>" <?= $value->order_status == 0 ? 'disabled' : ''?>>Feedback</button>
 
                                 </div>
                                  <div>
@@ -157,7 +157,7 @@ foreach ($orderData as $key => $value) {
 <hr style="margin-top: 3rem;margin-bottom: 0;">
 
 <?php } } else {?>
-   <h5>Not Order Found..!</h5>
+   <h5>No Orders Found..!</h5>
    <?php } ?>
 
 

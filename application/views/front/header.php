@@ -127,7 +127,7 @@ display: block;
 
             <?php } else {?>
 
-            <li class="nav-item"><a onclick="routeChanger()" class="nav-link">Login/Register</a></li>
+            <li class="nav-item"><a onclick="routeChanger()" class="nav-link btn">Login/Register</a></li>
 
             <?php } ?>
             
