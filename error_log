@@ -1,0 +1,15 @@
+[08-Apr-2024 22:14:30 Asia/Kolkata] PHP Fatal error:  During class fetch: Uncaught ParseError: syntax error, unexpected '|', expecting variable (T_VARIABLE) in /home/z9ipedlyxamz/public_html/employeecrm/application/libraries/mpdf/vendor/psr/log/src/LoggerTrait.php:23
+Stack trace:
+#0 /home/z9ipedlyxamz/public_html/employeecrm/application/libraries/mpdf/vendor/composer/ClassLoader.php(428): Composer\Autoload\includeFile('/home/z9ipedlyx...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('Psr\\Log\\LoggerT...')
+#2 /home/z9ipedlyxamz/public_html/employeecrm/application/libraries/mpdf/vendor/psr/log/src/AbstractLogger.php(12): spl_autoload_call('Psr\\Log\\LoggerT...')
+#3 /home/z9ipedlyxamz/public_html/employeecrm/application/libraries/mpdf/vendor/composer/ClassLoader.php(571): include('/home/z9ipedlyx...')
+#4 /home/z9ipedlyxamz/public_html/employeecrm/application/libraries/mpdf/vendor/composer/ClassLoader.php(428): Composer\Autoload\includeFile('/home/z9ipedlyx...')
+#5 [internal function]: Composer\Autoload\ClassLoader->loadClass('Psr\\Log\\Abstrac in /home/z9ipedlyxamz/public_html/employeecrm/application/libraries/mpdf/vendor/psr/log/src/AbstractLogger.php on line 12
+[13-Apr-2024 06:19:00 UTC] PHP Fatal error:  Cannot redeclare Sub_admin::deleteUser() in /home/z9ipedlyxamz/public_html/employeecrm/application/controllers/Sub_admin.php on line 3540
+[13-Apr-2024 06:20:09 UTC] PHP Fatal error:  Cannot redeclare Sub_admin::deleteUser() in /home/z9ipedlyxamz/public_html/employeecrm/application/controllers/Sub_admin.php on line 3540
+[13-Apr-2024 06:20:11 UTC] PHP Fatal error:  Cannot redeclare Sub_admin::deleteUser() in /home/z9ipedlyxamz/public_html/employeecrm/application/controllers/Sub_admin.php on line 3540
+[13-Apr-2024 06:20:12 UTC] PHP Fatal error:  Cannot redeclare Sub_admin::deleteUser() in /home/z9ipedlyxamz/public_html/employeecrm/application/controllers/Sub_admin.php on line 3540
+[18-May-2024 11:31:40 UTC] PHP Fatal error:  Cannot redeclare Sub_admin::editMobile() in /home/z9ipedlyxamz/public_html/employeecrm/application/controllers/Sub_admin.php on line 3366
+[18-May-2024 12:10:00 UTC] PHP Fatal error:  Cannot redeclare Sub_admin::editMobile() in /home/z9ipedlyxamz/public_html/employeecrm/application/controllers/Sub_admin.php on line 3443
+[28-Jul-2024 11:13:10 Asia/Kolkata] PHP Fatal error:  Cannot redeclare Dbhelper::user_details() in /home/z9ipedlyxamz/public_html/epaking/application/models/Dbhelper.php on line 111
