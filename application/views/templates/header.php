@@ -344,18 +344,34 @@
 
 
 
+                <?php $user_type = $this->session->userdata('user_type'); ?>
+                <?php if ($user_type == 2) { ?>
+                    <li <?php if ($this->uri->segment(1) == "dashboard" || $this->uri->segment(1) == "") { ?> class="active nav-item" <?php } else { ?> class="nav-item" <?php } ?>>
 
-                <li <?php if ($this->uri->segment(1) == "dashboard" || $this->uri->segment(1) == "") { ?> class="active nav-item" <?php } else { ?> class="nav-item" <?php } ?>>
+                        <a class="d-flex align-items-center" onclick="window.location.href='/eparking/front/admindashboard'">
 
-                    <a class="d-flex align-items-center" onclick="window.location.href='/eparking/front/admindashboard'">
+                            <i data-feather="home"></i>
 
-                        <i data-feather="home"></i>
+                            <span class="menu-title text-truncate" data-i18n="Dashboards">Dashboard</span>
 
-                        <span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span>
+                        </a>
 
-                    </a>
+                    </li>
+                <?php } ?>
+                <?php $user_type = $this->session->userdata('user_type'); ?>
+                <?php if ($user_type != 2) { ?>
+                    <li <?php if ($this->uri->segment(1) == "dashboard" || $this->uri->segment(1) == "") { ?> class="active nav-item" <?php } else { ?> class="nav-item" <?php } ?>>
 
-                </li>
+                        <a class="d-flex align-items-center" onclick="window.location.href='/eparking/dashboard'">
+
+                            <i data-feather="home"></i>
+
+                            <span class="menu-title text-truncate" data-i18n="Dashboards">Dashboard</span>
+
+                        </a>
+
+                    </li>
+                <?php } ?>
 
 
 
@@ -364,7 +380,7 @@
 
                     <li <?php if ($this->uri->segment(2) == "userlist") { ?> class="active nav-item" <?php } else { ?> class="nav-item" <?php } ?>>
 
-                        <a class="d-flex align-items-center" href="site_admin/userlist">
+                        <a class="d-flex align-items-center" href="/eparking/site_admin/userlist">
 
                             <i data-feather='map'></i>
 
@@ -378,7 +394,7 @@
 
                     <li <?php if ($this->uri->segment(2) == "parkingtypelist") { ?> class="active nav-item" <?php } else { ?> class="nav-item" <?php } ?>>
 
-                        <a class="d-flex align-items-center" href="site_admin/parkingtypelist">
+                        <a class="d-flex align-items-center" onclick="window.location.href='/eparking/site_admin/parkingtypelist'">
 
                             <i data-feather='book-open'></i>
 
@@ -413,18 +429,20 @@
 
                 </li>
 
-                <li <?php if ($this->uri->segment(2) == "feedbacklist") { ?> class="active nav-item" <?php } else { ?> class="nav-item" <?php } ?>>
+                <?php $user_type = $this->session->userdata('user_type'); ?>
+                <?php if ($user_type == 2) { ?>
+                    <li <?php if ($this->uri->segment(2) == "feedbacklist") { ?> class="active nav-item" <?php } else { ?> class="nav-item" <?php } ?>>
 
-                    <a class="d-flex align-items-center" onclick="window.location.href='/eparking/site_admin/feedbacklist'">
+                        <a class="d-flex align-items-center" onclick="window.location.href='/eparking/site_admin/feedbacklist'">
 
-                        <i data-feather='book-open'></i>
+                            <i data-feather='book-open'></i>
 
-                        <span class="menu-title text-truncate" data-i18n="Dashboards">Feebback</span>
+                            <span class="menu-title text-truncate" data-i18n="Dashboards">Feedback</span>
 
-                    </a>
+                        </a>
 
-                </li>
-
+                    </li>
+                <?php } ?>
 
 
 

@@ -153,9 +153,9 @@
                                      
                                         <td>
 
-                                            <a style="    padding: 4px;" href="<?=BASE_URL?>site_admin/editParkingType/<?=$val->id?>" class="btn btn-primary btn-sm"><i class="fa fa-edit" style="font-size:20px"></i></a> 
+                                            <a style="    padding: 4px;" href="editParkingType/<?=$val->id?>" class="btn btn-primary btn-sm"><i class="fa fa-edit" style="font-size:20px"></i></a> 
 
-                                            <a style="    padding: 4px;" href="<?=BASE_URL?>site_admin/deleteParkingType/<?=$val->id?>" class="btn btn-danger btn-sm"><i class="fa fa-trash" style="font-size:20px"></i></a>
+                                            <a style="    padding: 4px;" href="deleteParkingType/<?=$val->id?>" class="btn btn-danger btn-sm"><i class="fa fa-trash" style="font-size:20px"></i></a>
 
 
 

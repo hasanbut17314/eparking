@@ -396,6 +396,13 @@ class Dbhelper extends CI_Model {
         return ($this->db->affected_rows() != 1) ? false : true;
     }
 
+    public function getReports() {
+
+        $result = $this->db->get('reports');
+
+        return $result->result();
+    }
+
     public function getParkingTypeInfo($id) {
 
         $this->db->where('id', $id);

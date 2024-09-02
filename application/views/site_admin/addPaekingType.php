@@ -69,7 +69,7 @@
    <div class="content-overlay"></div>
    <div class="header-navbar-shadow"></div>
    <div class="card dt">
-      <form class="form" action="<?php echo BASE_URL.'site_admin/saveParkingType'?>" enctype="multipart/form-data" method="post">
+      <form class="form" action="<?php echo 'saveParkingType'?>" enctype="multipart/form-data" method="post">
             <span style="font-size: 15px;font-weight: bold;">Add Parking Type</span>
         <div class="col-md-12" style="margin-top: 10px;">
             <div class="col-md-6" style="float: left;">

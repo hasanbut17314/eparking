@@ -588,7 +588,7 @@
                      </div>
                      <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="termsCheckbox" required>
-                        <label class="form-check-label" for="termsCheckbox">I accept the <a href="#">terms and conditions</a></label>
+                        <label class="form-check-label" for="termsCheckbox">I accept the <a href="/eparking/front/terms_condition">terms and conditions</a></label>
                      </div>
                   </div>
                   <div class="modal-footer">

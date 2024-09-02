@@ -223,6 +223,15 @@ class Site_admin extends CI_Controller
 
 	}
 
+	public function report()
+	{
+
+		$data['title'] 				= "Manage  Report";
+		$admin_id =$this->session->userdata('admin_id');
+		$data['getReports'] = $this->dbhelper->getReports();
+		$this->load->template($this->tablename.'/reports',$data);
+	}
+
 	public function parkinglist()
 
 	{
@@ -366,7 +375,7 @@ class Site_admin extends CI_Controller
    $admin_id =$this->session->userdata('admin_id');
 				   $this->session->set_flashdata('success', 'Parking data update successfully..!');
    
-		   redirect(BASE_URL . "site_admin/parkingtypelist");
+		   redirect("site_admin/parkingtypelist");
    
    }
 
@@ -4094,7 +4103,7 @@ public function submit_datacircuit_entry() {
 
 		$this->session->set_flashdata('success','Parking data successfully..!');	
 
-			redirect(BASE_URL."site_admin/parkingtypelist");
+			redirect("site_admin/parkingtypelist");
 
 	}
 
@@ -4946,7 +4955,7 @@ public function submit_datacircuit_entry() {
 
 		$this->session->set_flashdata('success','Parking Type data successfully..!');	
 
-			redirect(BASE_URL."site_admin/parkingtypelist");
+			redirect("site_admin/parkingtypelist");
 
 	}
 
