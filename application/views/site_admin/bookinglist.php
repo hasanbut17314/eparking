@@ -1,27 +1,27 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/bootstrap.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/bootstrap.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/forms/wizard/bs-stepper.min.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/forms/wizard/bs-stepper.min.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/core/menu/menu-types/vertical-menu.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/core/menu/menu-types/vertical-menu.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/plugins/forms/form-validation.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/plugins/forms/form-validation.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/plugins/forms/form-wizard.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/plugins/forms/form-wizard.css') ?>">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- BEGIN: Content-->
+<!-- BEGIN: Content-->
 <!-- BEGIN: Vendor CSS-->
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/vendors.min.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/vendors.min.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/charts/apexcharts.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/charts/apexcharts.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/extensions/toastr.min.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/extensions/toastr.min.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/tables/datatable/responsive.bootstrap5.min.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/vendors/css/tables/datatable/responsive.bootstrap5.min.css') ?>">
 
 <!-- END: Vendor CSS-->
 
@@ -29,217 +29,218 @@
 
 <!-- BEGIN: Theme CSS-->
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/bootstrap.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/bootstrap.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/bootstrap-extended.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/bootstrap-extended.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/colors.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/colors.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/components.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/components.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/themes/dark-layout.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/themes/dark-layout.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/themes/bordered-layout.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/themes/bordered-layout.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/themes/semi-dark-layout.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/themes/semi-dark-layout.css') ?>">
 
 <!-- BEGIN: Page CSS-->
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/core/menu/menu-types/vertical-menu.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/core/menu/menu-types/vertical-menu.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/plugins/charts/chart-apex.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/plugins/charts/chart-apex.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/plugins/extensions/ext-component-toastr.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/plugins/extensions/ext-component-toastr.css') ?>">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/pages/app-invoice-list.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/pages/app-invoice-list.css') ?>">
 
 <!-- END: Page CSS-->
 
 
-    <div class="app-content content ">
+<div class="app-content content ">
 
-        <div class="content-overlay"></div>
+    <div class="content-overlay"></div>
 
-        <div class="header-navbar-shadow"></div>
-
-       
+    <div class="header-navbar-shadow"></div>
 
 
 
-        <div class="content-wrapper container-xxl p-0">
+
+
+    <div class="content-wrapper container-xxl p-0">
 
         <div class="content-header row">
 
-                <div class="content-header-left col-md-12 col-12 mb-2">
+            <div class="content-header-left col-md-12 col-12 mb-2">
 
-                    <div class="row breadcrumbs-top">
+                <div class="row breadcrumbs-top">
 
-                        <div class="col-10">
+                    <div class="col-10">
 
-                            <h2 class="content-header-title "><?=$title?></h2>
+                        <h2 class="content-header-title "><?= $title ?></h2>
 
-                            
 
-                        </div>
-
-                        
 
                     </div>
+
+
 
                 </div>
 
             </div>
 
-            <div class="content-body">
+        </div>
 
-                <!-- users list start -->
+        <div class="content-body">
 
-                <section class="app-user-list">
+            <!-- users list start -->
 
-                    <!-- list and filter start -->
+            <section class="app-user-list">
 
-                    <div class="card dt">
+                <!-- list and filter start -->
 
-                        
+                <div class="card dt">
 
-                        <div class="card-datatable table-responsive pt-0">
 
-                            <table id="dataTable" class="user-list-table table">
 
-                                <thead class="table-light">
+                    <div class="card-datatable table-responsive pt-0">
 
-                                    <tr>
+                        <table id="dataTable" class="user-list-table table">
 
-                                        
+                            <thead class="table-light">
 
-                                        <th>Id</th>
-                                        <th>Booking Id</th>
-                                        <th>User Name</th>
-                                        <th>Parking Name</th>
-                                        <th>Parking Date</th>
-                                        <th>Parking Time</th>
-                                        <th>Amount</th>
-                                        <th>Status</th>
-                                        
-                                        
+                                <tr>
 
-                                      
 
-                                    </tr>
 
-                                </thead>
+                                    <th>Id</th>
+                                    <th>Booking Id</th>
+                                    <th>User Name</th>
+                                    <th>Parking Name</th>
+                                    <th>Parking Date</th>
+                                    <th>Parking Time</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
 
-                                <tbody>
 
-                                    <?php
 
-                                    if (count($getBokingInfo) > 0) {
 
-                                        $co = 1;
 
-                                        foreach ($getBokingInfo as $key => $val) {
-                                           if($val->payment_status == 1){
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <?php
+
+                                if (count($getBokingInfo) > 0) {
+
+                                    $co = 1;
+
+                                    foreach ($getBokingInfo as $key => $val) {
+                                        if ($val->payment_status == 1) {
                                             $paymentStatus = "Completed";
-                                           }else{
+                                        } else {
                                             $paymentStatus = "Pending";
-                                           }
-                                           $getUserInfs = getUserInfs($val->user_id);
-                                           $getParkingInfos = getParkingInfos($val->parking_id);
-                                           // echo '<pre>';print_r($result);exit;
-                                    ?>
+                                        }
+                                        $getUserInfs = getUserInfs($val->user_id);
+                                        $getParkingInfos = getParkingInfos($val->parking_id);
+                                        // echo '<pre>';print_r($result);exit;
+                                ?>
 
                                         <tr id="<?php echo $val->id; ?>">
-                                        <td><?=$val->id?></td>
-                                        <td><?=$val->booking_id?></td>
+                                            <td><?= $val->id ?></td>
+                                            <td><?= $val->booking_id ?></td>
 
-                                        <td><?=$getUserInfs->name?></td>
-                                        <td><?=$getParkingInfos->name?></td>
-                                        <td><?=$val->parking_date?></td>
-                                        <td><?=$val->parking_start_time?></td>
-                                        <td>£<?=$val->amount?></td>
+                                            <td><?= $getUserInfs->name ?></td>
+                                            <td><?= $getParkingInfos->name ?></td>
+                                            <td><?= $val->parking_date ?></td>
+                                            <td><?= $val->parking_start_time ?></td>
+                                            <td>£<?= $val->amount ?></td>
 
-                                        <td><?=$paymentStatus?></td>
+                                            <td><?= $paymentStatus ?></td>
 
-                                      
 
-                                      
 
-                                    </tr>
 
-                                    <?php $co++; } } ?>
 
-                                </tbody>
+                                        </tr>
 
-                            </table>
+                                <?php $co++;
+                                    }
+                                } ?>
 
-                        </div>
+                            </tbody>
+
+                        </table>
 
                     </div>
 
-                    <!-- list and filter end -->
+                </div>
 
-                </section>
+                <!-- list and filter end -->
 
-                <!-- users list ends -->
+            </section>
 
-            </div>
+            <!-- users list ends -->
 
         </div>
 
     </div>
 
+</div>
 
 
 
 
-    <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            $('#dataTable').DataTable();
-
-        });</script>
 
 <script type="text/javascript">
+    $(document).ready(function() {
 
-$(".remove").click(function(){
+        $('#dataTable').DataTable();
 
-    var id = $(this).parents("tr").attr("id");
+    });
+</script>
 
+<script type="text/javascript">
+    $(".remove").click(function() {
 
-    if(confirm('Are you sure to remove this record ?'))
-
-    {
-        var base_url = "<?php echo base_url(); ?>";
-        $.ajax({
-
-           url: base_url + "site_admin/deleteLocation",
-           type: "POST",
-           data:{ getbranchname:id},
+        var id = $(this).parents("tr").attr("id");
 
 
-           error: function() {
+        if (confirm('Are you sure to remove this record ?'))
 
-              alert('Something is wrong');
+        {
+            var base_url = "<?php echo base_url(); ?>";
+            $.ajax({
 
-           },
-
-           success: function(data) {
-
-            if(data == 1){
-                location.reload(); 
-            }else{
-                alert("You can't delete this record. Operator is exist..!");
-            }
-            
-
-           }
-
-        });
-
-    }
-
-});
+                url: base_url + "site_admin/deleteLocation",
+                type: "POST",
+                data: {
+                    getbranchname: id
+                },
 
 
+                error: function() {
+
+                    alert('Something is wrong');
+
+                },
+
+                success: function(data) {
+
+                    if (data == 1) {
+                        location.reload();
+                    } else {
+                        alert("You can't delete this record. Operator is exist..!");
+                    }
+
+
+                }
+
+            });
+
+        }
+
+    });
 </script>

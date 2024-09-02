@@ -176,7 +176,7 @@
                                       
                                         <td>
 
-                                            <a style="    padding: 4px;" href="<?=BASE_URL?>site_admin/editParkingInfo/<?=$val->id?>" class="btn btn-primary btn-sm"><i class="fa fa-edit" style="font-size:20px"></i></a> 
+                                            <a style="    padding: 4px;" href="editParkingInfo/<?=$val->id?>" class="btn btn-primary btn-sm"><i class="fa fa-edit" style="font-size:20px"></i></a> 
 
 
 

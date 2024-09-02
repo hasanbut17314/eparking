@@ -5126,7 +5126,7 @@ public function submit_datacircuit_entry() {
 
 		$this->session->set_flashdata('success','Parking data successfully..!');	
 
-			redirect(BASE_URL."site_admin/parkinglist");
+			redirect("site_admin/parkinglist");
 
 	}
 

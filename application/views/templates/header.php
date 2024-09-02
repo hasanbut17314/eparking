@@ -197,19 +197,8 @@
 
 
 
-                                    if ($user_detaill->company_logo != '') {
 
-                                        if (file_exists("assets/uploads/admin/" . $user_detaill->company_logo)) {
-
-                                            $image_url = "assets/uploads/admin/" . $user_detaill->company_logo;;
-                                        } else {
-
-                                            $image_url = "assets/app-assets/images/portrait/small/avatar-s-11.jpg";
-                                        }
-                                    } else {
-
-                                        $image_url = "assets/app-assets/images/portrait/small/avatar-s-11.jpg";
-                                    }
+                                    $image_url = base_url('assets/app-assets/images/portrait/small/avatar-s-11.jpg');
                                     $personName = $user_detaill->person_name;
                                 }
                                 ?>
