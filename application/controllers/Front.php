@@ -665,6 +665,16 @@ class Front extends CI_Controller
         $this->load->view('front/footer');
     }
 
+    public function cancelBooking()
+    {
+
+        $postArr = $this->input->post();
+        $id = $postArr['orderId'];
+        $this->dbhelper->deleteBooking($id);
+        echo 200;
+        exit;
+    }
+
     function updateFeedback()
     {
         $id = $this->session->userdata('admin_id');

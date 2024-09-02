@@ -387,6 +387,15 @@ class Dbhelper extends CI_Model {
 
     }
 
+    public function deleteBooking($id) {
+
+        $this->db->where('booking_id', $id);
+
+        $this->db->delete('booking_info');
+
+        return ($this->db->affected_rows() != 1) ? false : true;
+    }
+
     public function getParkingTypeInfo($id) {
 
         $this->db->where('id', $id);
