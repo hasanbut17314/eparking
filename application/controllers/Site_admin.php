@@ -226,7 +226,7 @@ class Site_admin extends CI_Controller
 	public function report()
 	{
 
-		$data['title'] 				= "Manage  Report";
+		$data['title'] = "Manage Report";
 		$admin_id =$this->session->userdata('admin_id');
 		$data['getReports'] = $this->dbhelper->getReports();
 		$this->load->template($this->tablename.'/reports',$data);

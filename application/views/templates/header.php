@@ -444,6 +444,22 @@
                     </li>
                 <?php } ?>
 
+                <?php $user_type = $this->session->userdata('user_type'); ?>
+                <?php if ($user_type != 2) { ?>
+
+                    <li <?php if ($this->uri->segment(2) == "report") { ?> class="active nav-item" <?php } else { ?> class="nav-item" <?php } ?>>
+
+                        <a class="d-flex align-items-center" href="/eparking/site_admin/report">
+
+                            <i data-feather='book-open'></i>
+
+                            <span class="menu-title text-truncate" data-i18n="Dashboards">Reports</span>
+
+                        </a>
+
+                    </li>
+                <?php } ?>
+
 
 
 

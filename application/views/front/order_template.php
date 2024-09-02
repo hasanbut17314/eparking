@@ -107,7 +107,7 @@ if (!empty($orderData)) {
 
                                        <p><b><?= $carInfo->name ?> </b></p>
                                        <p><span><b>Duration :</b> <?= $value->parking_date . ' ' . $value->parking_start_time ?></span></p>
-                                       <a href="https://www.google.com/maps/search/<?= $parking_location ?>" class="btn btn-primary"><i class="fa fa-location"></i>Show Location on maps</a>
+                                       <a href="https://www.google.com/maps/search/<?= $parking_location ?>" class="btn btn-primary"><i class="fa fa-location-dot"></i>Show Location</a>
 
 
 
