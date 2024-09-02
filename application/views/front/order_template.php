@@ -1,8 +1,12 @@
 <link rel="stylesheet" href="<?php echo base_url('assets/custom/order.css') ?>">
+<link rel="stylesheet" href="../../../assets/front/css/ionicons.min.css">
 
-
-
-
+<style>
+   .btn {
+      font-weight: 500 !important;
+      letter-spacing: 1.1px !important;
+   }
+</style>
 
 <?php
 if (!empty($orderData)) {
@@ -13,9 +17,6 @@ if (!empty($orderData)) {
       $parking = $this->db->query($query)->row();
       $parking_location = $parking->parking_location;
 ?>
-
-
-
 
 
       <div class="order_block">
@@ -43,12 +44,6 @@ if (!empty($orderData)) {
                            <?php } ?>
                         </span><br>
 
-
-
-
-
-
-
                      </div>
 
                   </div>
@@ -58,20 +53,13 @@ if (!empty($orderData)) {
                      <div style="font-size: 15px;">
 
                         Order Id: <span class="dt_font_family"><?= $value->booking_id ?></span><br>
-
-
-
                      </div>
-
-
 
                   </div>
 
                </div>
 
             </div>
-
-
 
             <button class="btn btn-success addressprofileedit item_more_info" id="specific_item_infomore_0" data-key="0" style="margin-left: 40%; display: none;" data-id="0">Show More</button>
 
@@ -107,7 +95,7 @@ if (!empty($orderData)) {
 
                                        <p><b><?= $carInfo->name ?> </b></p>
                                        <p><span><b>Duration :</b> <?= $value->parking_date . ' ' . $value->parking_start_time ?></span></p>
-                                       <a href="https://www.google.com/maps/search/<?= $parking_location ?>" class="btn btn-primary"><i class="fa fa-location-dot"></i>Show Location</a>
+                                       <a href="https://www.google.com/maps/search/<?= $parking_location ?>" class="btn btn-primary"><i class="oi oi-location mr-2"></i>Show Location</a>
 
 
 
@@ -118,10 +106,10 @@ if (!empty($orderData)) {
                                        <p><span><b>Amount :</b> £<?= round($value->amount) ?> </span></p>
                                        <div>
 
-                                          <button class="addFeedBack btn btn-success" data-id="<?= $value->id ?>" <?= $value->payment_status == 0 ? 'disabled' : '' ?>>Feedback</button>
+                                          <button class="addFeedBack btn btn-success" data-id="<?= $value->id ?>" <?= $value->payment_status == 0 ? 'disabled' : '' ?>><i class="oi oi-chat mr-2"></i>Feedback</button>
                                           <br>
                                           <?php if ($value->payment_status == 1) { ?>
-                                          <button type="button" class="btn btn-danger mt-2 cancelModalBtn" data-id="<?= $value->booking_id ?>" data-toggle="modal" data-target="#staticBackdrop1">Cancel Booking</button>
+                                          <button type="button" class="btn btn-danger mt-2 cancelModalBtn" data-id="<?= $value->booking_id ?>" data-toggle="modal" data-target="#staticBackdrop1"><i class="oi oi-x mr-2"></i>Cancel Booking</button>
                                           <?php } ?>
 
                                        </div>

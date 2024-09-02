@@ -675,6 +675,17 @@ class Front extends CI_Controller
         exit;
     }
 
+    public function sendReport() {
+        $postArr = $this->input->post();
+        $data = [
+            'user_id' => $this->session->userdata('admin_id'),
+            'message' => $postArr['message']
+        ];
+        $this->dbhelper->createReports($data);
+        echo 200;
+        exit;
+    }
+
     function updateFeedback()
     {
         $id = $this->session->userdata('admin_id');

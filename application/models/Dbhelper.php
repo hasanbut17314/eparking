@@ -403,6 +403,13 @@ class Dbhelper extends CI_Model {
         return $result->result();
     }
 
+    public function createReports($data) {
+
+        $this->db->insert('reports', $data);
+
+        return $this->db->insert_id();
+    }
+
     public function getParkingTypeInfo($id) {
 
         $this->db->where('id', $id);

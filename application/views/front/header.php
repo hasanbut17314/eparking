@@ -122,10 +122,8 @@
 
                 <a href="<?= base_url('front/profile') ?>">Profile</a>
                 <a href="<?= base_url('front/profiles') ?>">Mybookings </a>
-
                 <a href="<?= base_url('front/logout') ?>">Logout</a>
-
-
+                <a type="button" style="color: black;" data-toggle="modal" data-target="#reportModal">Report</a>
 
               </div>
 
@@ -143,9 +141,96 @@
   </nav>
   <!-- END nav -->
 
+  <!-- Modal to send report message -->
+  <div class="modal fade" id="reportModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="reportLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reportLabel">Report a Problem</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input type="text" class="form-control" id="name" aria-describedby="emailHelp">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea class="form-control" id="message" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary sendReport">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for thanks -->
+  <div class="modal fade" id="thanksModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="thanksModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="thanksModalLabel">Report Sent</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Thanks for letting us know about your problem. We will look into it.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/eparking/assets/js/jquery-1.7.1.min.js"></script>
   <script>
     function routeChanger() {
-
       window.location = "<?= base_url('front/login') ?>";
     }
+
+    function validateReportForm() {
+      var name = $("#name").val().trim();
+      var message = $("#message").val().trim();
+
+      if (name !== "" && message !== "") {
+        $(".sendReport").prop("disabled", false);
+      } else {
+        $(".sendReport").prop("disabled", true);
+      }
+    }
+
+    $("#name, #message").on("input", validateReportForm);
+
+    $(document).on("click", ".sendReport", function() {
+      var name = $("#name").val();
+      var message = $("#message").val();
+
+      $.ajax({
+        method: "POST",
+        url: "sendReport",
+        data: {
+          name: name,
+          message: message
+        },
+        success: function(data) {
+          if (data == 200) {
+            $('#reportModal').modal('hide');
+            $('#thanksModal').modal('show');
+          } else {
+            alert("Something went wrong! Please try again later.");
+          }
+        }
+      });
+    });
+
+    $(document).ready(function() {
+      validateReportForm();
+    });
   </script>
