@@ -269,11 +269,8 @@ class Dbhelper extends CI_Model {
     }
 
     public function saveBookingData($data) {
-
         $this->db->insert('booking_info', $data);
-
         return $this->db->insert_id();
-
     }
 
     public function saveRegisterData($data) {

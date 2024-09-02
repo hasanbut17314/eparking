@@ -357,7 +357,75 @@
                     </div>
                     <div class="form-group" style="margin-top:18px">
 
-                      <button class="btn btn-primary btn-lg btn-block protopayment" style="background-color:#00aa56 !important;border:1px solid #00aa56 !important">Reserve <i class="fa fa-inr"></i> <?= $orderData->amount ?></button>
+                      <button class="btn btn-primary btn-lg btn-block" style="background-color:#00aa56 !important;border:1px solid #00aa56 !important" data-toggle="modal" data-target="#staticBackdrop">Reserve <i class="fa fa-inr"></i> <?= $orderData->amount ?></button>
+
+                      <!-- modal for payment -->
+
+                      <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="staticBackdropLabel">Payment Checkout</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div>
+                                <div class="form-group">
+                                  <label for="cardNumber">Card Number</label>
+                                  <input type="text" class="form-control" id="cardNumber" placeholder="Enter card number (16 digits)" required minlength="16" maxlength="16" pattern="\d{16}">
+                                  <small class="form-text text-muted">We'll never share your card details with anyone else.</small>
+                                </div>
+                                <div class="form-row">
+                                  <div class="col-md-6 mb-3">
+                                    <label for="expiryDate">Expiry Date</label>
+                                    <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})">
+                                  </div>
+                                  <div class="col-md-6 mb-3">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" class="form-control" id="cvv" placeholder="CVV" required minlength="3" maxlength="3" pattern="\d{3}">
+                                    <small class="form-text text-muted">3 digits at the back of your card</small>
+                                  </div>
+                                </div>
+                                <div class="form-group">
+                                  <label for="cardHolderName">Cardholder Name</label>
+                                  <input type="text" class="form-control" id="cardHolderName" placeholder="Enter cardholder's name" required>
+                                </div>
+                                <p>Total Ammount: <i class="fa fa-inr"></i> <?= $orderData->amount ?></p>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary protopayment" disabled>Pay Now</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <script>
+                        // Function to check if all fields are valid
+                        function checkFormValidity() {
+                          const cardNumber = document.querySelector('#cardNumber').value;
+                          const expiryDate = document.querySelector('#expiryDate').value;
+                          const cvv = document.querySelector('#cvv').value;
+                          const cardHolderName = document.querySelector('#cardHolderName').value;
+
+                          const isCardNumberValid = cardNumber.length === 16 && /^\d{16}$/.test(cardNumber);
+                          const isExpiryDateValid = /^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate);
+                          const isCVVValid = cvv.length === 3 && /^\d{3}$/.test(cvv);
+                          const isCardHolderNameValid = cardHolderName.length > 2;
+
+                          return isCardNumberValid && isExpiryDateValid && isCVVValid && isCardHolderNameValid;
+                        }
+
+                        // Event listeners for input fields
+                        document.querySelectorAll('#cardNumber, #expiryDate, #cvv, #cardHolderName').forEach(input => {
+                          input.addEventListener('input', function() {
+                            document.querySelector('.protopayment').disabled = !checkFormValidity();
+                          });
+                        });
+                      </script>
 
                     </div>
 

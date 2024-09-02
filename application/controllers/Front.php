@@ -2,131 +2,124 @@
 
 date_default_timezone_set('Asia/Kolkata');
 
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Front extends CI_Controller {
+class Front extends CI_Controller
+{
 
-	function __construct()
+    function __construct()
 
-	{
+    {
 
-		parent::__construct();
+        parent::__construct();
 
-		$this->tablename 		= "admin";
+        $this->tablename         = "admin";
 
-        $this->templatename 	= "login";
+        $this->templatename     = "login";
+    }
 
-	}
 
+    public function login()
 
-	public function login()
+    {
 
-	{
-
-		$data['parking_type_master'] = $this->dbhelper->parking_type_master();
-		$this->load->view('front/header');
-		$this->load->view('front/login', $data);
-		$this->load->view('front/footer');
-
-	}
+        $data['parking_type_master'] = $this->dbhelper->parking_type_master();
+        $this->load->view('front/header');
+        $this->load->view('front/login', $data);
+        $this->load->view('front/footer');
+    }
 
     public function register()
 
-	{
+    {
 
-		$data['parking_type_master'] = $this->dbhelper->parking_type_master();
-		$this->load->view('front/header');
-		$this->load->view('front/register', $data);
-		$this->load->view('front/footer');
-
-	}
+        $data['parking_type_master'] = $this->dbhelper->parking_type_master();
+        $this->load->view('front/header');
+        $this->load->view('front/register', $data);
+        $this->load->view('front/footer');
+    }
 
     public function parking()
 
-	{
-        $admin_id =$this->session->userdata('admin_id');
-		$data['parking_type_master'] = $this->dbhelper->parking_type_master();
-		$this->load->view('front/header');
-		$this->load->view('front/parking', $data);
-		$this->load->view('front/footer');
+    {
+        $admin_id = $this->session->userdata('admin_id');
+        $data['parking_type_master'] = $this->dbhelper->parking_type_master();
+        $this->load->view('front/header');
+        $this->load->view('front/parking', $data);
+        $this->load->view('front/footer');
+    }
 
-	}
-    
 
-    
+
     public function saveRegisterData()
 
-	{
+    {
 
         $postArr = $this->input->post();
-      //  if($postArr['options'] == 1){
-            $email = $postArr['nemail'];
-            $password = $postArr['password'];
-            $usertype = $this->input->post('options');
-            $fname = $this->input->post('fname');
-            $lname = $this->input->post('lname');
-            $mobile_otp = rand(0000,9999);
+        //  if($postArr['options'] == 1){
+        $email = $postArr['nemail'];
+        $password = $postArr['password'];
+        $usertype = $this->input->post('options');
+        $fname = $this->input->post('fname');
+        $lname = $this->input->post('lname');
+        $mobile_otp = rand(0000, 9999);
 
-            $config['upload_path']          = './uploads/';
+        $config['upload_path']          = './uploads/';
 
-            $config['allowed_types']        = '*';
+        $config['allowed_types']        = '*';
 
-            $config['encrypt_name']         = true;
+        $config['encrypt_name']         = true;
 
-            $config['max_width']            = 6024;
+        $config['max_width']            = 6024;
 
-            $this->load->library('upload', $config);
+        $this->load->library('upload', $config);
 
-            $this->upload->initialize($config);
+        $this->upload->initialize($config);
 
 
 
-            if (!$this->upload->do_upload('carimage')) {
+        if (!$this->upload->do_upload('carimage')) {
 
-              
 
-                $error = array('error' => $this->upload->display_errors());
-                $carimage = '';
+
+            $error = array('error' => $this->upload->display_errors());
+            $carimage = '';
+        } else {
+
+            if ($_FILES['carimage']['name'] != '') {
+
+                $fileData = $this->upload->data();
+
+                $carimage = $fileData['file_name'];
             } else {
-
-                if ($_FILES['carimage']['name'] != '') {
-
-                    $fileData = $this->upload->data();
-
-                    $carimage = $fileData['file_name'];
-
-                    
-
-                }else{
-                    $carimage = '';
-                }
-
+                $carimage = '';
             }
+        }
 
-            if($postArr['options'] == 2){
-                $vatnum = $postArr['vatnum'];
-            }else{
-                $vatnum = '';
-            }
+        if ($postArr['options'] == 2) {
+            $vatnum = $postArr['vatnum'];
+        } else {
+            $vatnum = '';
+        }
 
-            $name = $fname.' '.$lname;
-            $data = [
-                'email' => $postArr['nemail'],
-                'password' => md5($postArr['password']),
-                'user_type' => $postArr['options'],
-                'phonenumber' => $postArr['phonenumber'],
-                'datebirth' => $postArr['datebirth'],
-                'address' => $postArr['address'],
-                'city' => $postArr['city'],
-                'post_code' => $postArr['post_code'],
-                'vatnum' => $vatnum,
-                'name' => $fname.' '.$lname,
-                'otp_varify' => 0,
-                'image' => $carimage,
-                'otp' => $mobile_otp,
-            ];
-           
-            $insert_id = $this->dbhelper->saveRegisterData($data);
+        $name = $fname . ' ' . $lname;
+        $data = [
+            'email' => $postArr['nemail'],
+            'password' => md5($postArr['password']),
+            'user_type' => $postArr['options'],
+            'phonenumber' => $postArr['phonenumber'],
+            'datebirth' => $postArr['datebirth'],
+            'address' => $postArr['address'],
+            'city' => $postArr['city'],
+            'post_code' => $postArr['post_code'],
+            'vatnum' => $vatnum,
+            'name' => $fname . ' ' . $lname,
+            'otp_varify' => 0,
+            'image' => $carimage,
+            'otp' => $mobile_otp,
+        ];
+
+        $insert_id = $this->dbhelper->saveRegisterData($data);
         // }else{
         //     $email = $postArr['email'];
         //     $password = $postArr['password'];
@@ -141,29 +134,30 @@ class Front extends CI_Controller {
         //         'otp_varify' => 0,
         //         'otp' => $mobile_otp,
         //     ];
-            
+
         //     $insert_id = $this->dbhelper->saveRegisterData($data);
         // }
-       
-        $this->sendMail($mobile_otp,$email,$insert_id, $name);
+
+        $this->sendMail($mobile_otp, $email, $insert_id, $name);
         redirect(BASE_URL . "front/otpverify");
     }
 
-    function sendMail($otp,$email,$customerId,$name) {
+    function sendMail($otp, $email, $customerId, $name)
+    {
         $data = array(
-			"sender" => array(
-				"email" => 'no-replys@epaking.in',
-				"name" => 'New Registration - Do no reply to this email.'         
-			),
-			"to" => array(
-				array(
-					"email" => $email,
-					"name" => $name 
-				)
-		
-			),
-			"subject" => 'Epaking Account Security Code',
-			"htmlContent" => '<!DOCTYPE html>
+            "sender" => array(
+                "email" => 'no-replys@epaking.in',
+                "name" => 'New Registration - Do no reply to this email.'
+            ),
+            "to" => array(
+                array(
+                    "email" => $email,
+                    "name" => $name
+                )
+
+            ),
+            "subject" => 'Epaking Account Security Code',
+            "htmlContent" => '<!DOCTYPE html>
 
         <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
         <head>
@@ -357,7 +351,7 @@ class Front extends CI_Controller {
         <td style="padding-bottom:0px;padding-left:20px;padding-right:20px;padding-top:0px;">
         <div style="font-family:  Times New Roman, Times, serif">
         <div style="font-size: 12px; color: #191919; line-height: 2; font-family:  Times New Roman, Times, serif;">
-        <p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 56px; letter-spacing: normal;"><span style="font-size:28px;"><strong><span style="font-weight: bold;font-size: 30px;color: #000000;;">Verify Your account! Your otp is '.$otp.'</span></strong></span></p>
+        <p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 56px; letter-spacing: normal;"><span style="font-size:28px;"><strong><span style="font-weight: bold;font-size: 30px;color: #000000;;">Verify Your account! Your otp is ' . $otp . '</span></strong></span></p>
         </div>
         </div>
         </td>
@@ -383,218 +377,228 @@ class Front extends CI_Controller {
         </table>
         </body>
         </html>'
-    );
+        );
 
 
         $ch = curl_init();
-		
-		curl_setopt($ch, CURLOPT_URL, 'https://api.sendinblue.com/v3/smtp/email');
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-		
-		$headers = array();
-		$headers[] = 'Accept: application/json';
-		$headers[] = 'Api-Key: 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';
-		$headers[] = 'Content-Type: application/json';
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-		
-		$result = curl_exec($ch);
-		if (curl_errno($ch)) {
-			redirect('front/login');
-		}
-		curl_close($ch);
-		redirect('front/otpverify?cus='.$customerId);
+
+        curl_setopt($ch, CURLOPT_URL, 'https://api.sendinblue.com/v3/smtp/email');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+
+        $headers = array();
+        $headers[] = 'Accept: application/json';
+        $headers[] = 'Api-Key: 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';
+        $headers[] = 'Content-Type: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            redirect('front/login');
+        }
+        curl_close($ch);
+        redirect('front/otpverify?cus=' . $customerId);
     }
 
     public function otpverify()
-	{
-		$data['cus'] = $_GET['cus'];
-		$this->load->view('front/header');
+    {
+        $data['cus'] = $_GET['cus'];
+        $this->load->view('front/header');
 
-		$this->load->view('front/otpverify', $data);
+        $this->load->view('front/otpverify', $data);
 
-		$this->load->view('front/footer');
-	}
+        $this->load->view('front/footer');
+    }
 
     public function about()
-	{
-		
-		$this->load->view('front/header');
+    {
 
-		$this->load->view('front/about');
+        $this->load->view('front/header');
 
-		$this->load->view('front/footer');
-	}
+        $this->load->view('front/about');
+
+        $this->load->view('front/footer');
+    }
 
 
     public function terms_condition()
-	{
-		
-		$this->load->view('front/header');
+    {
 
-		$this->load->view('front/terms_condition');
+        $this->load->view('front/header');
 
-		$this->load->view('front/footer');
-	}
+        $this->load->view('front/terms_condition');
+
+        $this->load->view('front/footer');
+    }
 
 
     public function privacy_policy()
-	{
-		
-		$this->load->view('front/header');
+    {
 
-		$this->load->view('front/privacy_policy');
+        $this->load->view('front/header');
 
-		$this->load->view('front/footer');
-	}
+        $this->load->view('front/privacy_policy');
+
+        $this->load->view('front/footer');
+    }
 
     public function contact_us()
-	{
-		
-		$this->load->view('front/header');
+    {
 
-		$this->load->view('front/contact_us');
+        $this->load->view('front/header');
 
-		$this->load->view('front/footer');
-	}
+        $this->load->view('front/contact_us');
+
+        $this->load->view('front/footer');
+    }
 
 
     public function verifySecurityCode()
-	{
-		$postArr = $this->input->post();
-		$hidden_cus = $postArr['hidden_cus'];
-		$code = $postArr['code'];
-		
-		$dashboardData = $this->dbhelper->gethidden_cus($hidden_cus, $code);
-	
-		if(!empty($dashboardData)){
-			$updaetData = ['otp_varify' => 1];
-			$this->dbhelper->updateOtp($updaetData, $hidden_cus);
-			redirect('front/login');
-		}else{
-			
-			$this->session->set_flashdata('message', 'Otp Incorrect');
-			redirect('front/otpverify?cus='.$hidden_cus);
-		}
-	}
+    {
+        $postArr = $this->input->post();
+        $hidden_cus = $postArr['hidden_cus'];
+        $code = $postArr['code'];
 
-        
+        $dashboardData = $this->dbhelper->gethidden_cus($hidden_cus, $code);
+
+        if (!empty($dashboardData)) {
+            $updaetData = ['otp_varify' => 1];
+            $this->dbhelper->updateOtp($updaetData, $hidden_cus);
+            redirect('front/login');
+        } else {
+
+            $this->session->set_flashdata('message', 'Otp Incorrect');
+            redirect('front/otpverify?cus=' . $hidden_cus);
+        }
+    }
+
+
     public function dashboard()
 
-	{
+    {
         redirect("front/dashboard");
     }
 
     public function admindashboard()
 
-	{
-        $data['title'] 					= "Manage Dashboard";
-		$data['title'] 					= "Manage Dashboard";
-		$data['total_sub_admin'] 		= [];
-		$this->load->template("dashboard",$data);
+    {
+        $data['title']                     = "Manage Dashboard";
+        $data['title']                     = "Manage Dashboard";
+        $data['total_sub_admin']         = [];
+        $this->load->template("dashboard", $data);
     }
 
-    function checkout() {
+    function checkout()
+    {
         $orderId = $_GET['orderId'];
         $orderArr = $this->dbhelper->getParticularBookingData($orderId);
         $getParkingArrInfo = $this->dbhelper->getParkingArrInfo($orderArr->parking_id);
         $data['orderData'] = $orderArr;
         $data['getParkingArrInfo'] = $getParkingArrInfo;
         $this->load->view('front/header');
-		$this->load->view('front/checkout', $data);
-		$this->load->view('front/footer');
+        $this->load->view('front/checkout', $data);
+        $this->load->view('front/footer');
     }
 
-    
-    function thankyou() {
-      
+
+    function thankyou()
+    {
+
         $this->load->view('front/header');
-		$this->load->view('front/thankyou');
-		$this->load->view('front/footer');
+        $this->load->view('front/thankyou');
+        $this->load->view('front/footer');
     }
 
-    function updateAddress($id) {
-		$postArr = $this->input->post();
-		$data = [
-			'name' => $postArr['cus_name'],
-			'email' => $postArr['email'],
+    function updateAddress($id)
+    {
+        $postArr = $this->input->post();
+        $data = [
+            'name' => $postArr['cus_name'],
+            'email' => $postArr['email'],
             'phonenumber' => $postArr['phonenumber'],
             'address' => $postArr['address'],
-		];
-		$this->dbhelper->updateAddress($data, $id);
-		redirect('front/profile');
-	}
+        ];
+        $this->dbhelper->updateAddress($data, $id);
+        redirect('front/profile');
+    }
 
 
-    function profile() {
-      
-        $admin_id =$this->session->userdata('admin_id');
+    function profile()
+    {
+
+        $admin_id = $this->session->userdata('admin_id');
         $getCustomerInfo = $this->dbhelper->getCustomerInfo($admin_id);
         $data['customer'] = $getCustomerInfo;
         $this->load->view('front/header');
-		$this->load->view('front/profile', $data);
-		$this->load->view('front/footer');
+        $this->load->view('front/profile', $data);
+        $this->load->view('front/footer');
     }
 
-    function checkLocation() {
-            $postArr = $this->input->post();
-            echo '<pre>';print_r($postArr);exit;
+    function checkLocation()
+    {
+        $postArr = $this->input->post();
+        echo '<pre>';
+        print_r($postArr);
+        exit;
     }
 
-    function getLocation() {
+    function getLocation()
+    {
         // Your Mapbox access token
-$accessToken = 'sk.eyJ1Ijoic2hydXRoaWVsdXJpIiwiYSI6ImNsenJqdmFkNTF4bXMyanF1YjgzMGo0YjMifQ.S_hYTfeYscErPJURGX-Jwg';
+        $accessToken = 'sk.eyJ1Ijoic2hydXRoaWVsdXJpIiwiYSI6ImNsenJqdmFkNTF4bXMyanF1YjgzMGo0YjMifQ.S_hYTfeYscErPJURGX-Jwg';
 
-$address = 'Pennsylvania'; // Example address
-$encodedAddress = urlencode($address); // URL-encode the address
+        $address = 'Pennsylvania'; // Example address
+        $encodedAddress = urlencode($address); // URL-encode the address
 
-$url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' . $encodedAddress . '.json?access_token=' . $accessToken . '&country=gb&types=address,postcode,place,poi';
-// URL for the Mapbox Geocoding API
-//$url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/london.json?access_token=' . $accessToken . '&country=gb&types=address,postcode,place,poi';
+        $url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/' . $encodedAddress . '.json?access_token=' . $accessToken . '&country=gb&types=address,postcode,place,poi';
+        // URL for the Mapbox Geocoding API
+        //$url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/london.json?access_token=' . $accessToken . '&country=gb&types=address,postcode,place,poi';
 
-// Initialize a cURL session
-$ch = curl_init();
+        // Initialize a cURL session
+        $ch = curl_init();
 
-// Set cURL options
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string instead of outputting it
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Skip SSL verification for simplicity (not recommended for production)
+        // Set cURL options
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return the response as a string instead of outputting it
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Skip SSL verification for simplicity (not recommended for production)
 
-// Execute the cURL session and store the response
-$response = curl_exec($ch);
+        // Execute the cURL session and store the response
+        $response = curl_exec($ch);
 
-// Check for errors
-if ($response === false) {
-    echo 'cURL Error: ' . curl_error($ch);
-} else {
-    // Decode the JSON response
-    $data = json_decode($response, true);
+        // Check for errors
+        if ($response === false) {
+            echo 'cURL Error: ' . curl_error($ch);
+        } else {
+            // Decode the JSON response
+            $data = json_decode($response, true);
 
-    // Process the data (print the entire response for demonstration)
-    echo '<pre>';
-    print_r($data);
-    echo '</pre>';
-}
+            // Process the data (print the entire response for demonstration)
+            echo '<pre>';
+            print_r($data);
+            echo '</pre>';
+        }
 
-// Close the cURL session
-curl_close($ch);
+        // Close the cURL session
+        curl_close($ch);
     }
 
-    function profiles() {
-      
-        $admin_id =$this->session->userdata('admin_id');
+    function profiles()
+    {
+
+        $admin_id = $this->session->userdata('admin_id');
         $getCustomerInfo = $this->dbhelper->getCustomerInfo($admin_id);
         $data['customer'] = $getCustomerInfo;
         $this->load->view('front/header');
-		$this->load->view('front/profiles', $data);
-		$this->load->view('front/footer');
+        $this->load->view('front/profiles', $data);
+        $this->load->view('front/footer');
     }
 
-    
-    
-    
-    function updateOrderData() {
+
+
+
+    function updateOrderData()
+    {
         $postArr = $this->input->post();
         $orderid = $postArr['orderid'];
         $data = [
@@ -602,81 +606,67 @@ curl_close($ch);
         ];
         $this->dbhelper->updateBooking($data, $orderid);
         $this->session->unset_userdata('bookingId');
-        echo $orderid;exit;
+        echo $orderid;
+        exit;
     }
 
-    function ajaxsaveData() {
+    function ajaxsaveData()
+    {
         $postArr = $this->input->post();
-        $userId=  $this->session->userdata('admin_id');
-        $bookingId=  $this->session->userdata('bookingId');
-        if(empty($bookingId)){
-            //$bookingId = "EP".round(0000,9999);
-            $number = rand(0, 9999);
-            $formattedNumber = sprintf('%04d', $number);
-            $bookingId = "EP" . $formattedNumber;
-            $data = [
-                'parking_id' => $postArr['data_id'],
-                'parking_date' => $postArr['parkingdate'],
-                'parking_start_time' => $postArr['parkingtime'],
-                'booking_id' => $bookingId,
-                'user_id' => $userId,
-                'amount' => $postArr['parkingprice'],
-            ];
-            $this->session->set_userdata('bookingId',$bookingId);
-            $this->dbhelper->saveBookingData($data);
-            echo $bookingId;exit;
-        }else{
-            $data = [
-                'parking_id' => $postArr['data_id'],
-                'parking_date' => $postArr['parkingdate'],
-                'parking_start_time' => $postArr['parkingtime'],
-                'booking_id' => $bookingId,
-                'user_id' => $userId,
-                'amount' => $postArr['parkingprice'],
-            ];
-            $this->dbhelper->updateBooking($data, $bookingId);
-            echo $bookingId;exit;
-        }
-
-        
+        $userId =  $this->session->userdata('admin_id');
+        $number = rand(0, 9999);
+        $formattedNumber = sprintf('%04d', $number);
+        $bookingId = "EP" . $formattedNumber;
+        $data = [
+            'parking_id' => $postArr['data_id'],
+            'parking_date' => $postArr['parkingdate'],
+            'parking_start_time' => $postArr['parkingtime'],
+            'booking_id' => $bookingId,
+            'user_id' => $userId,
+            'amount' => $postArr['parkingprice'],
+            'vehicle_num' => $postArr['vehicleNumber']
+        ];
+        $this->dbhelper->saveBookingData($data);
+        echo $bookingId;
+        exit;
     }
 
-    
+
     public function checkBookDetails()
 
-	{
-       $postArr = $this->input->post();
-       $data['parking_date'] = $postArr['parking_date'];
-       $data['parking_time'] = $postArr['parking_time'];
-       $getBooking = $this->dbhelper->getBooking($data['parking_date'],$data['parking_time']);
-       $getAllparking = $this->dbhelper->getAllparking();
+    {
+        $postArr = $this->input->post();
+        $data['parking_date'] = $postArr['parking_date'];
+        $data['parking_time'] = $postArr['parking_time'];
+        $getBooking = $this->dbhelper->getBooking($data['parking_date'], $data['parking_time']);
+        $getAllparking = $this->dbhelper->getAllparking();
 
 
         foreach ($getAllparking as $key => $value) {
-            if(!empty($getBooking)){
+            if (!empty($getBooking)) {
                 foreach ($getBooking as $firstItem) {
                     if ($firstItem['parking_id'] == $value->id) {
                         $getAllparking[$key]->slot = 1;
                         break; // No need to continue checking other items in the first array
-                    }else{
+                    } else {
                         $getAllparking[$key]->slot = 0;
                     }
                 }
-            }else{
+            } else {
                 $getAllparking[$key]->slot = 0;
             }
-            
         }
-        
-       $data['getAllparking'] = $getAllparking;
-       $admin_id =$this->session->userdata('admin_id');
-       $data['parking_type_master'] = $this->dbhelper->parking_type_master();
-       $this->load->view('front/header');
-       $this->load->view('front/parking', $data);
-       $this->load->view('front/footer');
+
+        $data['getAllparking'] = $getAllparking;
+        $admin_id = $this->session->userdata('admin_id');
+        $data['parking_type_master'] = $this->dbhelper->parking_type_master();
+        $this->load->view('front/header');
+        $this->load->view('front/parking', $data);
+        $this->load->view('front/footer');
     }
 
-    function updateFeedback() {
+    function updateFeedback()
+    {
         $id = $this->session->userdata('admin_id');
         $postArr = $this->input->post();
         $data = [
@@ -690,94 +680,84 @@ curl_close($ch);
         redirect("front/profile");
     }
 
-    public function getOrderDetails() {
+    public function getOrderDetails()
+    {
 
-		$id = $this->session->userdata('admin_id');
+        $id = $this->session->userdata('admin_id');
 
-		$data['orderData'] = $this->dbhelper->getOrderDatas($id);
+        $data['orderData'] = $this->dbhelper->getOrderDatas($id);
 
 
 
-	    $this->load->view('front/order_template', $data);
-
+        $this->load->view('front/order_template', $data);
     }
 
-    public function logout(){
+    public function logout()
+    {
 
-		$this->session->unset_userdata('email');
+        $this->session->unset_userdata('email');
 
-		$this->session->unset_userdata('name');
+        $this->session->unset_userdata('name');
 
-		$this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('user_id');
 
         redirect("login");
+    }
 
-	}
 
-    
     public function checkLogin()
 
-	{
+    {
 
         $postArr = $this->input->post();
 
-		$email = $postArr['email'];
+        $email = $postArr['email'];
         $password = $postArr['password'];
         $usertype = $this->input->post('options');
-        if($this->input->post('email') <> "" && $this->input->post('password') <> "")
+        if ($this->input->post('email') <> "" && $this->input->post('password') <> "") {
 
-		{
+            $is_valid             = $this->dbhelper->validate_front_user($email, md5($password), $usertype);
 
-        $is_valid 			= $this->dbhelper->validate_front_user($email,md5($password), $usertype);
+            if ($this->dbhelper->getSingleValue("user_login", "count(*)", "email='" . $email . "'")) {
+                $user_data = $this->dbhelper->singleRow("user_login", "*", "email='$email'");
+                if ($is_valid == 1) {
+                    $sess_data = array(
 
-        if($this->dbhelper->getSingleValue("user_login","count(*)","email='".$email."'"))
+                        'admin_id'         => $user_data->id,
 
-        {
-            $user_data = $this->dbhelper->singleRow("user_login","*","email='$email'");
-            if($is_valid == 1)
+                        'name'             => $user_data->name,
 
-            {
-                $sess_data = array(
+                        'email'         => $user_data->email,
 
-                    'admin_id' 		=> $user_data->id,
+                        'user_type'         => $user_data->user_type,
 
-                    'name' 			=> $user_data->name,
+                        'is_login'         => true,
 
-                    'email' 		=> $user_data->email,
+                    );
 
-                    'user_type' 		=> $user_data->user_type,
+                    $this->session->set_userdata($sess_data);
 
-                    'is_login' 		=> true,
+                    $this->session->set_flashdata('success', 'Login successfully.!!');
 
-                );
+                    if ($user_data->user_type == 1) {
+                        redirect("front/profile");
+                    } else {
+                        redirect("front/admindashboard");
+                    }
+                } else {
+                    $this->session->set_flashdata('message', 'Incorrect email & password.!');
 
-                $this->session->set_userdata($sess_data);
-
-                $this->session->set_flashdata('success', 'Login successfully.!!');	
-
-                if($user_data->user_type == 1){
-                    redirect("front/profile");
-                }else{
-                    redirect("front/admindashboard");
+                    redirect("front/login");
                 }
-             
-            }else{
-                $this->session->set_flashdata('message', 'Incorrect email & password.!');	
+            } else {
+                $this->session->set_flashdata('message', 'Incorrect email & password.!');
 
-				redirect("front/login");
+                redirect("front/login");
             }
-        }else{
-                $this->session->set_flashdata('message', 'Incorrect email & password.!');	
+        } else {
+            $this->session->set_flashdata('message', 'Plase enter email address & password.!');
 
-				redirect("front/login");
+            redirect("front/login");
         }
-
-
-
-        }else{
-	        $this->session->set_flashdata('message', 'Plase enter email address & password.!');
-
-			redirect("front/login");
-        }
-	}
+    }
 }
