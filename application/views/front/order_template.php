@@ -35,11 +35,11 @@ if (!empty($orderData)) {
                         Booking Status: <span class="dt_font_family">
 
 
-                           <?php if ($value->order_status == 0) { ?>
-                              <button class="btn btn-warning" style="font-weight: bold;padding: 4px 3px !important;padding-top: 3px !important;border-radius: 14px;color:#fff;">Pending</button>
+                           <?php if ($value->payment_status == 0) { ?>
+                              <button class="btn btn-warning" style="font-weight: bold;padding: 4px 3px !important;padding-top: 3px !important;border-radius: 14px;color:#fff;">unpaid</button>
 
                            <?php } else { ?>
-                              <button class="btn btn-success" style="background-color: #00aa56 !important;font-weight: bold;padding: 4px 3px !important;padding-top: 3px !important;border-radius: 14px;">Completed</button>
+                              <button class="btn btn-success" style="background-color: #00aa56 !important;font-weight: bold;padding: 4px 3px !important;padding-top: 3px !important;border-radius: 14px;">Approved</button>
                            <?php } ?>
                         </span><br>
 
@@ -118,9 +118,11 @@ if (!empty($orderData)) {
                                        <p><span><b>Amount :</b> £<?= round($value->amount) ?> </span></p>
                                        <div>
 
-                                          <button class="addFeedBack btn btn-success" data-id="<?= $value->id ?>" <?= $value->order_status == 0 ? 'disabled' : '' ?>>Feedback</button>
+                                          <button class="addFeedBack btn btn-success" data-id="<?= $value->id ?>" <?= $value->payment_status == 0 ? 'disabled' : '' ?>>Feedback</button>
                                           <br>
+                                          <?php if ($value->payment_status == 1) { ?>
                                           <button type="button" class="btn btn-danger mt-2 cancelModalBtn" data-id="<?= $value->booking_id ?>" data-toggle="modal" data-target="#staticBackdrop1">Cancel Booking</button>
+                                          <?php } ?>
 
                                        </div>
                                        <div>
@@ -172,7 +174,6 @@ if (!empty($orderData)) {
    </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
    $(document).on("click", ".cancelModalBtn", function() {

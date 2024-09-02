@@ -62,6 +62,8 @@
 <!-- END: Page CSS-->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://unpkg.com/feather-icons"></script>
+
 <!-- BEGIN: Content-->
 <div class="app-content content ">
     <div class="content-overlay"></div>
@@ -82,100 +84,198 @@
 
                     </div>
 
-                    <!-- Statistics Card -->
-                    <div class="col-xl-12 col-md-12 col-12">
-                        <div class="card card-statistics">
-                            <div class="card-header">
-                                <h4 class="card-title">Statistics</h4>
-                                <div class="d-flex align-items-center">
-                                    <p class="card-text font-small-2 mr-25 mb-0">Updated 1 day ago</p>
+                    <!-- Statistics Card for super admin-->
+                    <?php $user_type = $this->session->userdata('user_type'); ?>
+                    <?php if ($user_type != 2) { ?>
+                        <div class="col-xl-12 col-md-12 col-12">
+                            <div class="card card-statistics">
+                                <div class="card-header">
+                                    <h4 class="card-title">Statistics</h4>
+                                    <div class="d-flex align-items-center">
+                                        <p class="card-text font-small-2 mr-25 mb-0">Updated 1 day ago</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-body statistics-body">
-                                <div class="row">
+                                <div class="card-body statistics-body">
+                                    <div class="row">
 
-                                    <?php
-                                    $admin_id = $this->session->userdata('admin_id');
-                                    $getParking =  getParking($admin_id);
-                                    ?>
-                                    <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
-                                        <a href="<?= base_url('site_admin/parkinglist') ?>">
-                                            <div class="media">
-                                                <div class="avatar bg-light-info mr-2">
-                                                    <div class="avatar-content">
-                                                        <i data-feather="user" class="avatar-icon"></i>
+                                        <?php
+                                        $admin_id = $this->session->userdata('admin_id');
+                                        $getParking =  getParking($admin_id);
+                                        ?>
+                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                            <a>
+                                                <div class="media">
+                                                    <div class="avatar bg-light-info mr-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="user" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-body my-auto">
+                                                        <h4 class="font-weight-bolder mb-0">5</h4>
+                                                        <p class="card-text font-small-3 mb-0">New Users</p>
                                                     </div>
                                                 </div>
-                                                <div class="media-body my-auto">
-                                                    <h4 class="font-weight-bolder mb-0"> <?= count($getParking); ?></h4>
-                                                    <p class="card-text font-small-3 mb-0">Pakring</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
-                                        <a href="<?= base_url('site_admin/bookinglist') ?>">
-                                            <div class="media">
-                                                <div class="avatar bg-light-danger mr-2">
-                                                    <div class="avatar-content">
-                                                        <i data-feather="trending-up" class="avatar-icon"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
+                                            <a>
+                                                <div class="media">
+                                                    <div class="avatar bg-light-danger mr-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="trending-up" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                    $admin_id = $this->session->userdata('admin_id');
+                                                    $getBooking =  getBooking();
+                                                    ?>
+                                                    <div class="media-body my-auto">
+                                                        <h4 class="font-weight-bolder mb-0">12</h4>
+                                                        <p class="card-text font-small-3 mb-0">Website Visits</p>
                                                     </div>
                                                 </div>
-                                                <?php
-                                                $admin_id = $this->session->userdata('admin_id');
-                                                $getBooking =  getBooking();
-                                                ?>
-                                                <div class="media-body my-auto">
-                                                    <h4 class="font-weight-bolder mb-0"><?= count($getBooking); ?></h4>
-                                                    <p class="card-text font-small-3 mb-0">Book Slot</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-xl-3 col-sm-6 col-12">
-                                        <a href="<?= base_url('site_admin/feedbacklist') ?>">
-                                            <div class="media">
-                                                <div class="avatar bg-light-success mr-2">
-                                                    <div class="avatar-content">
-                                                        <i data-feather="trending-up" class="avatar-icon"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-6 col-12">
+                                            <a>
+                                                <div class="media">
+                                                    <div class="avatar bg-light-success mr-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="alert-circle" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                    $admin_id = $this->session->userdata('admin_id');
+                                                    $getFeedbakc =  getFeedbakc();
+                                                    ?>
+                                                    <div class="media-body my-auto">
+                                                        <h4 class="font-weight-bolder mb-0">3</h4>
+                                                        <p class="card-text font-small-3 mb-0">New Reports</p>
                                                     </div>
                                                 </div>
-                                                <?php
-                                                $admin_id = $this->session->userdata('admin_id');
-                                                $getFeedbakc =  getFeedbakc();
-                                                ?>
-                                                <div class="media-body my-auto">
-                                                    <h4 class="font-weight-bolder mb-0"><?= count($getFeedbakc); ?></h4>
-                                                    <p class="card-text font-small-3 mb-0">Available Slots</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-xl-3 col-sm-6 col-12">
-                                        <a href="<?= base_url('site_admin/feedbacklist') ?>">
-                                            <div class="media">
-                                                <div class="avatar bg-light-success mr-2">
-                                                    <div class="avatar-content">
-                                                        <i data-feather="trending-up" class="avatar-icon"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-6 col-12">
+                                            <a>
+                                                <div class="media">
+                                                    <div class="avatar bg-light-success mr-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="pie-chart" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                    $admin_id = $this->session->userdata('admin_id');
+                                                    $getFeedbakc =  getTotalEarn();
+                                                    ?>
+                                                    <div class="media-body my-auto">
+                                                        <h4 class="font-weight-bolder mb-0">8</h4>
+                                                        <p class="card-text font-small-3 mb-0">Parkings Booked</p>
                                                     </div>
                                                 </div>
-                                                <?php
-                                                $admin_id = $this->session->userdata('admin_id');
-                                                $getFeedbakc =  getTotalEarn();
-                                                ?>
-                                                <div class="media-body my-auto">
-                                                    <h4 class="font-weight-bolder mb-0"><?= "£" . $getFeedbakc; ?></h4>
-                                                    <p class="card-text font-small-3 mb-0">Total Earn</p>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
+                                            </a>
+                                        </div>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!--/ Statistics Card -->
+                    <?php } ?>
+                    <!--/ Statistics Card for admin ends -->
+                    <?php $user_type = $this->session->userdata('user_type'); ?>
+                    <?php if ($user_type == 2) { ?>
+                        <div class="col-xl-12 col-md-12 col-12">
+                            <div class="card card-statistics">
+                                <div class="card-header">
+                                    <h4 class="card-title">Statistics</h4>
+                                    <div class="d-flex align-items-center">
+                                        <p class="card-text font-small-2 mr-25 mb-0">Updated 1 day ago</p>
+                                    </div>
+                                </div>
+                                <div class="card-body statistics-body">
+                                    <div class="row">
+
+                                        <?php
+                                        $admin_id = $this->session->userdata('admin_id');
+                                        $getParking =  getParking($admin_id);
+                                        ?>
+                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
+                                            <a href="<?= base_url('site_admin/parkinglist') ?>">
+                                                <div class="media">
+                                                    <div class="avatar bg-light-info mr-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="user" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-body my-auto">
+                                                        <h4 class="font-weight-bolder mb-0"> <?= count($getParking); ?></h4>
+                                                        <p class="card-text font-small-3 mb-0">Parking</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
+                                            <a href="<?= base_url('site_admin/bookinglist') ?>">
+                                                <div class="media">
+                                                    <div class="avatar bg-light-danger mr-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="trending-up" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                    $admin_id = $this->session->userdata('admin_id');
+                                                    $getBooking =  getBooking();
+                                                    ?>
+                                                    <div class="media-body my-auto">
+                                                        <h4 class="font-weight-bolder mb-0"><?= count($getBooking); ?></h4>
+                                                        <p class="card-text font-small-3 mb-0">Book Slot</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-6 col-12">
+                                            <a href="<?= base_url('site_admin/feedbacklist') ?>">
+                                                <div class="media">
+                                                    <div class="avatar bg-light-success mr-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="trending-up" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                    $admin_id = $this->session->userdata('admin_id');
+                                                    $getFeedbakc =  getFeedbakc();
+                                                    ?>
+                                                    <div class="media-body my-auto">
+                                                        <h4 class="font-weight-bolder mb-0"><?= count($getFeedbakc); ?></h4>
+                                                        <p class="card-text font-small-3 mb-0">Available Slots</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-xl-3 col-sm-6 col-12">
+                                            <a href="<?= base_url('site_admin/feedbacklist') ?>">
+                                                <div class="media">
+                                                    <div class="avatar bg-light-success mr-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="trending-up" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                    $admin_id = $this->session->userdata('admin_id');
+                                                    $getFeedbakc =  getTotalEarn();
+                                                    ?>
+                                                    <div class="media-body my-auto">
+                                                        <h4 class="font-weight-bolder mb-0"><?= "£" . $getFeedbakc; ?></h4>
+                                                        <p class="card-text font-small-3 mb-0">Total Earn</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
                 </div>
             </section>
             <!-- Dashboard Ecommerce ends -->

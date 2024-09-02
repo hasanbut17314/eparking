@@ -115,11 +115,11 @@
                                     <th>Id</th>
                                     <th>Booking Id</th>
                                     <th>User Name</th>
+                                    <th>Vehicle Number</th>
                                     <th>Parking Name</th>
                                     <th>Parking Date</th>
                                     <th>Parking Time</th>
                                     <th>Amount</th>
-                                    <th>Status</th>
 
 
 
@@ -153,12 +153,11 @@
                                             <td><?= $val->booking_id ?></td>
 
                                             <td><?= $getUserInfs->name ?></td>
+                                            <td><?=$val->vehicle_num?></td>
                                             <td><?= $getParkingInfos->name ?></td>
                                             <td><?= $val->parking_date ?></td>
                                             <td><?= $val->parking_start_time ?></td>
                                             <td>£<?= $val->amount ?></td>
-
-                                            <td><?= $paymentStatus ?></td>
 
 
 
