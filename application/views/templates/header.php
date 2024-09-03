@@ -174,7 +174,7 @@
 
                 </li> -->
 
-                <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                         <div class="user-nav d-sm-flex d-none">
 
@@ -210,16 +210,53 @@
                             <span class="user-status"> <?php echo $user_detaill->name; ?></span>
 
                         </div>
+                        <?php $user_type = $this->session->userdata('user_type'); ?>
+                        <?php
+                        $userId = $this->session->userdata('admin_id');
+                        $notificationCount = $this->db->where('user_id', $userId)->count_all_results('notifications');
+                        $notifications = $this->db->where('user_id', $userId)->order_by('created_at', 'DESC')->get('notifications')->result();
+                        ?>
+                        <?php if ($user_type == 2) { ?>
+                            <span id="notification-bell" class="avatar position-relative">
 
-                        <span class="avatar">
+                                <img class="round" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png" alt="avatar" height="40" width="40">
+                                <?php if ($notificationCount > 0): ?>
+                                    <span id="notification-count" style="position: absolute; top: -7px; right: -4px; background-color: red; color: white; border-radius: 50%; padding: 3px 5px; font-size: 12px;"><?php echo $notificationCount; ?></span>
+                                <?php endif; ?>
+                                <span class="avatar-status-online"></span>
 
-                            <img class="round" src="<?= $image_url ?>" alt="avatar" height="40" width="40">
+                            </span>
+                        <?php } else { ?>
+                            <span class="avatar">
 
-                            <span class="avatar-status-online"></span>
+                                <img class="round" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png" alt="avatar" height="40" width="40">
 
-                        </span>
+                                <span class="avatar-status-online"></span>
+
+                            </span>
+                        <?php } ?>
 
                     </a>
+
+                    <div id="notification-container" style="display: none; flex-direction: column; position: absolute; top: 45px; right: 0; background-color: #fff; border: 1px solid #ccc; border-radius: 5px; width: 300px; max-height: 400px; min-height: 300px; overflow-y: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 1000; <?= empty($notifications) ? 'justify-content: center; align-items: center;' : '' ?>">
+                        <?php
+                        if (!empty($notifications)) {
+                            echo '<div class="p-2 bg-light d-flex align-self-top">Notifications</div>';
+                            foreach ($notifications as $notification) {
+                                echo '<div style="padding: 8px; border-bottom: 1px solid #ccc; line-height: 1.5">' . $notification->message . '</div>';
+                            }
+                        } else {
+                            echo '<div style="padding: 8px; text-align: center;">No notifications</div>';
+                        }
+                        ?>
+                    </div>
+                    <script>
+                        // Toggle Notification Container
+                        document.getElementById('notification-bell').addEventListener('click', function() {
+                            var container = document.getElementById('notification-container');
+                            container.style.display = container.style.display === 'none' ? 'flex' : 'none';
+                        });
+                    </script>
 
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
 
@@ -265,7 +302,7 @@
 
                 <li class="nav-item me-auto">
 
-                    <a class="navbar-brand" href="<?= BASE_URL ?>">
+                    <a class="navbar-brand" href="/eparking">
 
                         <h2 class="brand-text">
 

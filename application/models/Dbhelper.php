@@ -128,6 +128,13 @@ class Dbhelper extends CI_Model {
         return $this->db->insert_id();
     }
 
+    public function getNotifications($id) {
+
+        $this->db->where('user_id', $id);
+        $this->db->order_by('id', 'DESC');
+        return $this->db->get('notifications')->result();
+    }
+
     public function gethidden_cus($id, $code){
         $this->db->where('id', $id);
         $this->db->where('otp', $code);

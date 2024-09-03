@@ -712,6 +712,12 @@ class Front extends CI_Controller
         exit;
     }
 
+    public function getNotifications() {
+        $user_id = $this->session->userdata('admin_id');
+        $notifications = $this->dbhelper->getNotifications($user_id);
+        return $notifications;
+    }
+
     public function sendReport()
     {
         $postArr = $this->input->post();

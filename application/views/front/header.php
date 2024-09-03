@@ -114,7 +114,7 @@
           <li class="nav-item"><a href="<?= base_url('front/contact_us') ?>" class="nav-link">Contact</a></li>
           <?php if (!empty($this->session->userdata('email'))) { ?>
 
-            <div class="dropdown">
+            <div class="dropdown nav-item">
 
               <button class="dropbtn" style="background: none;color: #fff;"><?= $this->session->userdata('name') ?></button>
 
@@ -128,6 +128,36 @@
               </div>
 
             </div>
+
+            <!-- Notification Bell Icon -->
+            <div style="position: relative;">
+              <?php
+              $userId = $this->session->userdata('admin_id');
+              $notificationCount = $this->db->where('user_id', $userId)->count_all_results('notifications');
+              $notifications = $this->db->where('user_id', $userId)->order_by('created_at', 'DESC')->get('notifications')->result();
+              ?>
+              <button id="notification-bell" style="background: none; border: none; cursor: pointer; font-size: 20px; outline: none;" class="pt-2">
+                🔔
+                <?php if ($notificationCount > 0): ?>
+                  <span id="notification-count" style="position: absolute; top: 6px; right: -2px; background-color: red; color: white; border-radius: 50%; padding: 1px 7px; font-size: 10px;"><?php echo $notificationCount; ?></span>
+                <?php endif; ?>
+              </button>
+
+              <!-- Notification Container -->
+              <div id="notification-container" style="display: none; flex-direction: column; position: absolute; top: 45px; right: 0; background-color: #fff; border: 1px solid #ccc; border-radius: 5px; width: 300px; max-height: 400px; min-height: 300px; overflow-y: auto; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 1000; <?= empty($notifications) ? 'justify-content: center; align-items: center;' : '' ?>">
+                <?php
+                if (!empty($notifications)) {
+                  echo '<div class="p-2 bg-light d-flex align-self-top">Notifications</div>';
+                  foreach ($notifications as $notification) {
+                    echo '<div style="padding: 8px; border-bottom: 1px solid #ccc;">' . $notification->message . '</div>';
+                  }
+                } else {
+                  echo '<div style="padding: 8px; text-align: center;">No notifications</div>';
+                }
+                ?>
+              </div>
+            </div>
+
 
           <?php } else { ?>
 
@@ -232,5 +262,11 @@
 
     $(document).ready(function() {
       validateReportForm();
+    });
+
+    // Toggle Notification Container
+    document.getElementById('notification-bell').addEventListener('click', function() {
+      var container = document.getElementById('notification-container');
+      container.style.display = container.style.display === 'none' ? 'flex' : 'none';
     });
   </script>
