@@ -115,6 +115,19 @@ class Dbhelper extends CI_Model {
 
     }
 
+    public function getUserInfo($id) {
+
+        $this->db->where('id', $id);
+
+        return $this->db->get('user_login')->row();
+    }
+
+    public function createNotification($data) {
+
+        $this->db->insert('notifications', $data);
+        return $this->db->insert_id();
+    }
+
     public function gethidden_cus($id, $code){
         $this->db->where('id', $id);
         $this->db->where('otp', $code);

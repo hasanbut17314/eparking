@@ -122,10 +122,6 @@
                                             <td><?= $val->message ?></td>
                                             <td><?= $val->created_at ?></td>
 
-
-
-
-
                                         </tr>
 
                                     <?php $co++;

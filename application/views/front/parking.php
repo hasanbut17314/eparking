@@ -525,6 +525,7 @@
             <input type="hidden" id="parkingtime<?= $value->id ?>" value="<?= $parking_time; ?>">
             <input type="hidden" id="parkingdate<?= $value->id ?>" value="<?= $parking_date; ?>">
             <input type="hidden" id="parkingprice<?= $value->id ?>" value="<?= $value->price; ?>">
+            <input type="hidden" id="pkOwnerId<?= $value->id ?>" value="<?= $value->user_type; ?>">
             <div class="col-md-3">
                <div class="car-wrap rounded ftco-animate fadeInUp ftco-animated">
                   <div class="img rounded d-flex align-items-end" style="background-image: url(..//uploads/<?php echo $value->parking_image ?>);    margin: 0 auto;    height: 140px;">
@@ -637,6 +638,7 @@
       var parkingdate = $("#parkingdate" + data_id).val();
       var parkingprice = $("#parkingprice" + data_id).val();
       var vehicleNumber = $('#vehicleNumber').val();
+      var pkOwnerId = $("#pkOwnerId" + data_id).val();
 
       $.ajax({
          type: 'POST',
@@ -648,10 +650,14 @@
             "parkingdate": parkingdate,
             "parkingprice": parkingprice,
             "vehicleNumber": vehicleNumber,
+            "pkOwnerId": pkOwnerId
          },
          success: function(response) {
             var redirectUrl = "<?= base_url('front/checkout') ?>?orderId=" + response;
             window.location.href = redirectUrl;
+         },
+         error: function(xhr, status, error) {
+            console.log(xhr.responseText);
          }
       });
    });

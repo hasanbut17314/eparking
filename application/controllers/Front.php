@@ -617,6 +617,7 @@ class Front extends CI_Controller
         $number = rand(0, 9999);
         $formattedNumber = sprintf('%04d', $number);
         $bookingId = "EP" . $formattedNumber;
+
         $data = [
             'parking_id' => $postArr['data_id'],
             'parking_date' => $postArr['parkingdate'],
@@ -626,10 +627,31 @@ class Front extends CI_Controller
             'amount' => $postArr['parkingprice'],
             'vehicle_num' => $postArr['vehicleNumber']
         ];
+
         $this->dbhelper->saveBookingData($data);
+
+        $parkingSlotInfo = $this->dbhelper->getParkingArrInfo($postArr['data_id']);
+        $parkingSlotName = $parkingSlotInfo->name;
+
+        $driverNotification = [
+            'user_id' => $userId,
+            'message' => 'Your booking for parking slot at ' . $parkingSlotName . ' is confirmed.'
+        ];
+        $this->dbhelper->createNotification($driverNotification);
+
+        $owner = $this->dbhelper->getUserInfo($postArr['pkOwnerId']);
+        $driverName = $owner->name;
+
+        $ownerNotification = [
+            'user_id' => $postArr['pkOwnerId'],
+            'message' => 'A new booking for parking slot ' . $parkingSlotName . ' has been made by ' . $driverName . '.'
+        ];
+        $this->dbhelper->createNotification($ownerNotification);
+
         echo $bookingId;
         exit;
     }
+
 
 
     public function checkBookDetails()
@@ -670,12 +692,28 @@ class Front extends CI_Controller
 
         $postArr = $this->input->post();
         $id = $postArr['orderId'];
+        $orderDetail = $this->dbhelper->getParticularBookingData($id);
+        $parkingId = $orderDetail->parking_id;
+        $parkingDetail = $this->dbhelper->getParkingArrInfo($parkingId);
+        $OwnerId = $parkingDetail->user_type;
+        $driverId = $this->session->userdata('admin_id');
+        $ownerNotification = [
+            'user_id' => $OwnerId,
+            'message' => 'Your order of booking for parking slot at ' . $parkingDetail->name . ' is cancelled.'
+        ];
+        $this->dbhelper->createNotification($ownerNotification);
+        $driverNotification = [
+            'user_id' => $driverId,
+            'message' => 'Your booking at ' . $parkingDetail->name . ' is cancelled with 20% penalty.'
+        ];
+        $this->dbhelper->createNotification($driverNotification);
         $this->dbhelper->deleteBooking($id);
         echo 200;
         exit;
     }
 
-    public function sendReport() {
+    public function sendReport()
+    {
         $postArr = $this->input->post();
         $data = [
             'user_id' => $this->session->userdata('admin_id'),
