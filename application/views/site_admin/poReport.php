@@ -26,8 +26,6 @@
 
 <!-- END: Vendor CSS-->
 
-
-
 <!-- BEGIN: Theme CSS-->
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/bootstrap.css') ?>">

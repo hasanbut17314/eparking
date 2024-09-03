@@ -120,7 +120,7 @@
                                             <td><?= $co ?></td>
                                             <td><?= $getUserInfs->name ?></td>
                                             <td><?= $val->message ?></td>
-                                            <td>£<?= $val->created_at ?></td>
+                                            <td><?= $val->created_at ?></td>
 
 
 
