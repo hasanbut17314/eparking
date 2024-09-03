@@ -442,6 +442,17 @@
                         </a>
 
                     </li>
+                    <li <?php if ($this->uri->segment(2) == "poReport") { ?> class="active nav-item" <?php } else { ?> class="nav-item" <?php } ?>>
+
+                        <a class="d-flex align-items-center" onclick="window.location.href='/eparking/site_admin/poReport'">
+
+                            <i data-feather='alert-circle'></i>
+
+                            <span class="menu-title text-truncate" data-i18n="Dashboards">Report Problem</span>
+
+                        </a>
+
+                    </li>
                 <?php } ?>
 
                 <?php $user_type = $this->session->userdata('user_type'); ?>
