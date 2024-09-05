@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2024 at 07:31 PM
+-- Generation Time: Sep 03, 2024 at 05:18 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -36,18 +36,11 @@ CREATE TABLE `booking_info` (
   `parking_end_time` text DEFAULT NULL,
   `booking_id` text DEFAULT NULL,
   `user_id` text DEFAULT NULL,
+  `vehicle_num` varchar(120) NOT NULL,
   `amount` text DEFAULT NULL,
   `payment_status` text DEFAULT '0',
   `order_status` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `booking_info`
---
-
-INSERT INTO `booking_info` (`id`, `parking_id`, `parking_date`, `parking_start_time`, `parking_end_time`, `booking_id`, `user_id`, `amount`, `payment_status`, `order_status`) VALUES
-(2, '16', '2024-07-28', '10:10 AM', NULL, 'EP0', '1', '2', '1', 1),
-(3, '16', '2024-07-29', '09:00 AM', NULL, 'EP2884', '1', '2', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -64,13 +57,6 @@ CREATE TABLE `feedback` (
   `comments` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `feedback`
---
-
-INSERT INTO `feedback` (`id`, `user_id`, `order_id`, `name`, `rating`, `comments`) VALUES
-(1, '1', '2', 'Jenish', '5', 'Good service.');
-
 -- --------------------------------------------------------
 
 --
@@ -82,6 +68,20 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `is_read` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -118,7 +118,7 @@ CREATE TABLE `parking` (
 --
 
 INSERT INTO `parking` (`id`, `name`, `parking_type`, `parking_image`, `parking_start_time`, `parking_end_time`, `sunday`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `price`, `parking_location`, `pincode`, `parking_slot`, `user_type`, `vat`, `createAt`, `isdelete`) VALUES
-(16, 'Westfield London', '1', '8ab587b28223b589ed44256530c4aec3.jpg', '1', '1', 'on', 'on', 'on', 'on', 'on', 'on', 'on', '2', 'Harbour Parade, Southampton SO15 1QF, United Kingdom', '441622', '5', 2, NULL, '2024-07-27 18:26:57', 1),
+(16, 'Westfield London', '1', '8ab587b28223b589ed44256530c4aec3.jpg', '1', '1', 'on', 'on', 'on', 'on', 'on', 'on', 'on', '2', 'Harbour Parade, Southampton SO15 1QF, United Kingdom', '441622', '6', 2, '', '2024-07-27 18:26:57', 1),
 (17, 'The Trafford Centre', '1', 'e77dafcefdfd1dea1203c8cac729a50c.jpg', '5', '11', 'on', 'on', 'on', 'on', 'on', 'on', 'on', '1.2', 'Regent Cres, Stretford M17 8AA England', 'M17 8AP', '5', 2, '', '2024-07-28 06:31:17', 1);
 
 -- --------------------------------------------------------
@@ -139,8 +139,23 @@ CREATE TABLE `parking_type` (
 
 INSERT INTO `parking_type` (`id`, `parking_type_name`, `user_type`) VALUES
 (1, 'Shopping Mall', NULL),
-(2, 'Hospital', NULL),
-(3, 'Community Hall', NULL);
+(5, 'Community Hall', NULL),
+(6, 'Hospital', NULL),
+(7, 'Marriage Hall', NULL),
+(8, 'Church', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reports`
+--
+
+CREATE TABLE `reports` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `message` mediumtext NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -201,12 +216,8 @@ CREATE TABLE `user_login` (
 --
 
 INSERT INTO `user_login` (`id`, `name`, `email`, `password`, `user_type`, `otp_varify`, `phonenumber`, `datebirth`, `address`, `city`, `post_code`, `image`, `vatnum`, `otp`) VALUES
-(1, 'Jenish', 'jenish@gmail.com', '25f9e794323b453885f5181f1b624d0b', '1', NULL, '9652524152', NULL, 'Test', NULL, NULL, NULL, NULL, NULL),
-(2, 'Brijesh', 'brijesh@gmail.com', '25f9e794323b453885f5181f1b624d0b', '2', NULL, '9685748575', NULL, 'Test', 'Test', '1234', NULL, 'sw23wqdw', NULL),
-(7, 'kanan', 'ghadiyajenish@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2', '1', '', NULL, 'LE1 4AN, Leicester', 'Leicester', '235434', '71a0c0e97d106ae927182f260b5b87bf.jpg', 'erdf34325', '8458'),
-(8, 'MOnshc test', 'monch@test.com', 'e10adc3949ba59abbe56e057f20f883e', '1', '1', '9685857485', '2024-08-12', 'Test', 'Tet', '1234', '', '', '597'),
-(9, 'Muhammad Rehman', 'kashifrehman9053@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', '1', '1', 'admin', '2024-09-06', 'Vilage dalri haripur kp', 'Haripur ', '22620', 'c5ce0b39d18bba3a8ca5d7aead8eb92c.jpg', '', '2017'),
-(10, 'Muhammad Rehman', 'kashifkhan9053@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '1', '1', '03350968767', '2024-08-31', 'Vilage dalri haripur kp', 'Haripur ', '22620', 'b3ea98616a5665ffcbfa83b49a4dd423.jpg', '', '1561');
+(1, 'Jenish', 'jenish@gmail.com', '25f9e794323b453885f5181f1b624d0b', '1', '1', '9652524152', NULL, 'Test', NULL, NULL, NULL, NULL, NULL),
+(2, 'Brijesh', 'brijesh@gmail.com', '25f9e794323b453885f5181f1b624d0b', '2', '1', '9685748575', NULL, 'Test', 'Test', '1234', NULL, 'sw23wqdw', NULL);
 
 --
 -- Indexes for dumped tables
@@ -231,6 +242,12 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `parking`
 --
 ALTER TABLE `parking`
@@ -240,6 +257,12 @@ ALTER TABLE `parking`
 -- Indexes for table `parking_type`
 --
 ALTER TABLE `parking_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -262,13 +285,13 @@ ALTER TABLE `user_login`
 -- AUTO_INCREMENT for table `booking_info`
 --
 ALTER TABLE `booking_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -277,16 +300,28 @@ ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `parking`
 --
 ALTER TABLE `parking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `parking_type`
 --
 ALTER TABLE `parking_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `site_admin`
@@ -298,7 +333,7 @@ ALTER TABLE `site_admin`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
