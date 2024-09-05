@@ -39,6 +39,8 @@ if (!empty($orderData)) {
                            <?php if ($value->payment_status == 0) { ?>
                               <button class="btn btn-warning" style="font-weight: bold;padding: 4px 3px !important;padding-top: 3px !important;border-radius: 14px;color:#fff;">unpaid</button>
 
+                           <?php } else if($value->payment_status == 2) { ?>
+                              <button class="btn btn-danger" style="font-weight: bold;padding: 4px 3px !important;padding-top: 3px !important;border-radius: 14px;">cancelled</button>
                            <?php } else { ?>
                               <button class="btn btn-success" style="background-color: #00aa56 !important;font-weight: bold;padding: 4px 3px !important;padding-top: 3px !important;border-radius: 14px;">Approved</button>
                            <?php } ?>

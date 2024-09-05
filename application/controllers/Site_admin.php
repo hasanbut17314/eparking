@@ -218,12 +218,14 @@ class Site_admin extends CI_Controller
 
 	{
 
-		$data['title'] 				= "Manage  Booking Details";
+		$data['title'] = "Manage  Booking Details";
 		$admin_id = $this->session->userdata('admin_id');
-		$data['getBokingInfo']         =  $this->dbhelper->getBokingInfo();
+		$data['getBokingInfo'] =  $this->dbhelper->getBokingInfo();
+		$data['bookingFilter'] =  $this->dbhelper->getBokingInfoByUserId($admin_id);
 
 		$this->load->template($this->tablename . '/bookinglist', $data);
 	}
+
 
 	public function feedbacklist()
 

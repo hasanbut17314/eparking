@@ -64,7 +64,7 @@
 			    				<div class="d-flex">
 			    					<div class="form-group">
 			                <label for="" class="label" style="color: #1f1f1f;">Parking date</label>
-							<input type="date" class="form-control common_radius pickatime" name="parking_date" id="book_pick_dates" placeholder="Start Date">
+							<input type="date" class="form-control common_radius pickatime" name="parking_date" id="book_pick_dates" placeholder="Start Date" required>
 			              </div>
 						  <script>
         document.addEventListener('DOMContentLoaded', function() {

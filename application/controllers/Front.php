@@ -3,6 +3,7 @@
 date_default_timezone_set('Asia/Kolkata');
 
 defined('BASEPATH') or exit('No direct script access allowed');
+use SendGrid\Mail\Mail;
 
 class Front extends CI_Controller
 {
@@ -48,7 +49,6 @@ class Front extends CI_Controller
         $this->load->view('front/parking', $data);
         $this->load->view('front/footer');
     }
-
 
 
     public function saveRegisterData()
@@ -120,23 +120,6 @@ class Front extends CI_Controller
         ];
 
         $insert_id = $this->dbhelper->saveRegisterData($data);
-        // }else{
-        //     $email = $postArr['email'];
-        //     $password = $postArr['password'];
-        //     $usertype = $this->input->post('options');
-        //     $name = $this->input->post('name');
-        //     $mobile_otp = rand(0000,9999);
-        //     $data = [
-        //         'email' => $postArr['email'],
-        //         'password' => md5($postArr['password']),
-        //         'user_type' => $postArr['options'],
-        //         'name' => $postArr['name'],
-        //         'otp_varify' => 0,
-        //         'otp' => $mobile_otp,
-        //     ];
-
-        //     $insert_id = $this->dbhelper->saveRegisterData($data);
-        // }
 
         $this->sendMail($mobile_otp, $email, $insert_id, $name);
         redirect(BASE_URL . "front/otpverify");
@@ -144,261 +127,24 @@ class Front extends CI_Controller
 
     function sendMail($otp, $email, $customerId, $name)
     {
-        $data = array(
-            "sender" => array(
-                "email" => 'no-replys@epaking.in',
-                "name" => 'New Registration - Do no reply to this email.'
-            ),
-            "to" => array(
-                array(
-                    "email" => $email,
-                    "name" => $name
-                )
+        $emailContent = "<p>Verify your account! Your OTP is <strong>{$otp}</strong></p>";
 
-            ),
-            "subject" => 'Epaking Account Security Code',
-            "htmlContent" => '<!DOCTYPE html>
+        $email = new Mail();
+        $email->setFrom("no-reply@eparking.com", "E-Parking");
+        $email->setSubject("Your Security Code");
+        $email->addTo($email, $name);
+        $email->addContent("text/html", $emailContent);
 
-        <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
-        <head>
-        <title></title>
-        <meta charset="utf-8"/>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-        <!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
-        <style>
-                * {
-                    box-sizing: border-box;
-                }
-
-                body {
-                    margin: 0;
-                    padding: 0;
-                }
-
-                th.column {
-                    padding: 0
-                }
-
-                a[x-apple-data-detectors] {
-                    color: inherit !important;
-                    text-decoration: inherit !important;
-                }
-
-                #MessageViewBody a {
-                    color: inherit;
-                    text-decoration: none;
-                }
-
-                p {
-                    line-height: inherit
-                }
-
-                @media (max-width:720px) {
-                    .icons-inner {
-                        text-align: center;
-                    }
-
-                    .icons-inner td {
-                        margin: 0 auto;
-                    }
-
-                    .row-content {
-                        width: 100% !important;
-                    }
-
-                    .image_block img.big {
-                        width: auto !important;
-                    }
-
-                    .stack .column {
-                        width: 100%;
-                        display: block;
-                    }
-                }
-                .code
-                {
-                    border: 1px solid #B9B9B9;
-                    padding: 10px;
-                    border-radius: 10px;
-                    font-style: normal;
-                    font-weight: bold;
-                    font-size: 26px;
-                    text-align: center;
-                    color: #000000;
-                    width: 80%;
-                    margin: 0 auto 20px;
-                }
-                .email-right-prt .bottom-data{
-                    padding:30px 20px;
-                    text-align:center;
-                }
-
-                .bottom-data h3{
-                    font-style: normal;
-                    font-weight: normal;
-                    font-size: 18px;
-                    text-align: center;
-                    color: #5F5F5F;
-                }
-
-                .bottom-data p{
-                    font-style: normal;
-                    font-weight: normal;
-                    font-size: 14px;
-                    text-align: center;
-                    color: #5F5F5F;
-                    display:block;
-                    margin-bottom:6px;
-                }
-
-                .bottom-data a{
-                    font-style: normal;
-                    font-weight: bold;
-                    font-size: 18px;
-                    text-align: center;
-                    color: #5F5F5F;
-                    margin-bottom:10px;
-                    display:block;
-                }
-
-                 .bottom-data h6 a{
-                    font-style: normal;
-                    font-weight: normal;
-                    font-size: 14px;
-                    text-align: center;
-                    text-decoration-line: underline;
-                    color: #5F5F5F;
-
-                }
-                .bottom-data h3 img
-                {
-                    vertical-align: middle;
-                }
-            </style>
-        </head>
-        <body style="background-color: #ffffff; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-        <table border="0" cellpadding="0" cellspacing="0" class="nl-container" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;" width="100%">
-        <tbody>
-        <tr>
-        <td>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-        <tbody>
-        <tr>
-        <td>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="700">
-        <tbody>
-        <tr>
-        <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px;" width="100%">
-        <div class="spacer_block" style="height:10px;line-height:10px;"> </div>
-        </th>
-        </tr>
-        </tbody>
-        </table>
-        </td>
-        </tr>
-        </tbody>
-        </table>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-        <tbody>
-        <tr>
-        <td>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="700">
-        <tbody>
-        <tr>
-        <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px;" width="100%">
-        <table border="0" cellpadding="0" cellspacing="0" class="empty_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-        <tr>
-        <td>
-        <div></div>
-        </td>
-        </tr>
-        </table>
-        </th>
-        </tr>
-        </tbody>
-        </table>
-        </td>
-        </tr>
-        </tbody>
-        </table>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-        <tbody>
-        <tr>
-        <td>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="700">
-        <tbody>
-        <tr>
-        <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 5px; padding-bottom: 5px;" width="100%">
-     
-        </th>
-        </tr>
-        </tbody>
-        </table>
-        </td>
-        </tr>
-        </tbody>
-        </table>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row row-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-        <tbody>
-        <tr>
-        <td>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #ffffff;" width="700">
-        <tbody>
-        <tr>
-        <th class="column" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 0px; padding-bottom: 5px;" width="100%">
-        <table border="0" cellpadding="0" cellspacing="0" class="text_block" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
-        <tr>
-        <td style="padding-bottom:0px;padding-left:20px;padding-right:20px;padding-top:0px;">
-        <div style="font-family:  Times New Roman, Times, serif">
-        <div style="font-size: 12px; color: #191919; line-height: 2; font-family:  Times New Roman, Times, serif;">
-        <p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 56px; letter-spacing: normal;"><span style="font-size:28px;"><strong><span style="font-weight: bold;font-size: 30px;color: #000000;;">Verify Your account! Your otp is ' . $otp . '</span></strong></span></p>
-        </div>
-        </div>
-        </td>
-        </tr>
-        </table>
-    
-        </th>
-        </tr>
-        </tbody>
-        </table>
-        </td>
-        </tr>
-        </tbody>
-        </table>
-      
-       
-        </tbody>
-        </table>
-      
-        </td>
-        </tr>
-        </tbody>
-        </table>
-        </body>
-        </html>'
-        );
-
-
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, 'https://api.sendinblue.com/v3/smtp/email');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-
-        $headers = array();
-        $headers[] = 'Accept: application/json';
-        $headers[] = 'Api-Key: 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';
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) {
+        $sendgrid = new \SendGrid('YOUR_SENDGRID_API_KEY');
+        try {
+            $response = $sendgrid->send($email);
+            if ($response->statusCode() == 202) {
+                redirect('front/otpverify?cus=' . $customerId);
+            }
+        } catch (Exception $e) {
+            log_message('error', 'Caught exception: ' . $e->getMessage());
             redirect('front/login');
         }
-        curl_close($ch);
-        redirect('front/otpverify?cus=' . $customerId);
     }
 
     public function otpverify()
@@ -622,6 +368,7 @@ class Front extends CI_Controller
             'parking_id' => $postArr['data_id'],
             'parking_date' => $postArr['parkingdate'],
             'parking_start_time' => $postArr['parkingtime'],
+            'parking_end_time' => $postArr['parking_end_time'],
             'booking_id' => $bookingId,
             'user_id' => $userId,
             'amount' => $postArr['parkingprice'],
@@ -660,7 +407,8 @@ class Front extends CI_Controller
         $postArr = $this->input->post();
         $data['parking_date'] = $postArr['parking_date'];
         $data['parking_time'] = $postArr['parking_time'];
-        $getBooking = $this->dbhelper->getBooking($data['parking_date'], $data['parking_time']);
+        $data['parking_end_time'] = $postArr['parking_end_time'];
+        $getBooking = $this->dbhelper->getBooking($data['parking_date'], $data['parking_time'], $data['parking_end_time']);
         $getAllparking = $this->dbhelper->getAllparking();
 
 
@@ -712,7 +460,8 @@ class Front extends CI_Controller
         exit;
     }
 
-    public function getNotifications() {
+    public function getNotifications()
+    {
         $user_id = $this->session->userdata('admin_id');
         $notifications = $this->dbhelper->getNotifications($user_id);
         return $notifications;

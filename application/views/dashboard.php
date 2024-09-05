@@ -99,8 +99,7 @@
                                     <div class="row">
 
                                         <?php
-                                        $admin_id = $this->session->userdata('admin_id');
-                                        $getParking =  getParking($admin_id);
+                                        $users = $this->dbhelper->user_details();
                                         ?>
                                         <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
                                             <a>
@@ -111,7 +110,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="media-body my-auto">
-                                                        <h4 class="font-weight-bolder mb-0">5</h4>
+                                                        <h4 class="font-weight-bolder mb-0"><?=count($users)?></h4>
                                                         <p class="card-text font-small-3 mb-0">New Users</p>
                                                     </div>
                                                 </div>
@@ -145,11 +144,10 @@
                                                         </div>
                                                     </div>
                                                     <?php
-                                                    $admin_id = $this->session->userdata('admin_id');
-                                                    $getFeedbakc =  getFeedbakc();
+                                                    $reports = $this->dbhelper->getReports();
                                                     ?>
                                                     <div class="media-body my-auto">
-                                                        <h4 class="font-weight-bolder mb-0">3</h4>
+                                                        <h4 class="font-weight-bolder mb-0"><?=count($reports)?></h4>
                                                         <p class="card-text font-small-3 mb-0">New Reports</p>
                                                     </div>
                                                 </div>
@@ -164,11 +162,10 @@
                                                         </div>
                                                     </div>
                                                     <?php
-                                                    $admin_id = $this->session->userdata('admin_id');
-                                                    $getFeedbakc =  getTotalEarn();
+                                                    $bookings = $this->dbhelper->getBokingInfo();
                                                     ?>
                                                     <div class="media-body my-auto">
-                                                        <h4 class="font-weight-bolder mb-0">8</h4>
+                                                        <h4 class="font-weight-bolder mb-0"><?=count($bookings)?></h4>
                                                         <p class="card-text font-small-3 mb-0">Parkings Booked</p>
                                                     </div>
                                                 </div>
@@ -199,7 +196,7 @@
                                         $getParking =  getParking($admin_id);
                                         ?>
                                         <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-xl-0">
-                                            <a href="<?= base_url('site_admin/parkinglist') ?>">
+                                            <a href="#">
                                                 <div class="media">
                                                     <div class="avatar bg-light-info mr-2">
                                                         <div class="avatar-content">
@@ -214,7 +211,7 @@
                                             </a>
                                         </div>
                                         <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
-                                            <a href="<?= base_url('site_admin/bookinglist') ?>">
+                                            <a href="#">
                                                 <div class="media">
                                                     <div class="avatar bg-light-danger mr-2">
                                                         <div class="avatar-content">
@@ -233,7 +230,7 @@
                                             </a>
                                         </div>
                                         <div class="col-xl-3 col-sm-6 col-12">
-                                            <a href="<?= base_url('site_admin/feedbacklist') ?>">
+                                            <a href="#">
                                                 <div class="media">
                                                     <div class="avatar bg-light-success mr-2">
                                                         <div class="avatar-content">
@@ -252,7 +249,7 @@
                                             </a>
                                         </div>
                                         <div class="col-xl-3 col-sm-6 col-12">
-                                            <a href="<?= base_url('site_admin/feedbacklist') ?>">
+                                            <a href="#">
                                                 <div class="media">
                                                     <div class="avatar bg-light-success mr-2">
                                                         <div class="avatar-content">

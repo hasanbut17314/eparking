@@ -62,10 +62,6 @@
 
     <div class="header-navbar-shadow"></div>
 
-
-
-
-
     <div class="content-wrapper container-xxl p-0">
 
         <div class="content-header row">
@@ -78,11 +74,7 @@
 
                         <h2 class="content-header-title "><?= $title ?></h2>
 
-
-
                     </div>
-
-
 
                 </div>
 
@@ -103,76 +95,145 @@
 
 
                     <div class="card-datatable table-responsive pt-0">
+                        <?php if ($this->session->userData('user_type') !== 2) { ?>
+                            <table id="dataTable" class="user-list-table table">
 
-                        <table id="dataTable" class="user-list-table table">
+                                <thead class="table-light">
 
-                            <thead class="table-light">
-
-                                <tr>
-
-
-
-                                    <th>Id</th>
-                                    <th>Booking Id</th>
-                                    <th>User Name</th>
-                                    <th>Vehicle Number</th>
-                                    <th>Parking Name</th>
-                                    <th>Parking Date</th>
-                                    <th>Parking Time</th>
-                                    <th>Amount</th>
+                                    <tr>
 
 
 
+                                        <th>Id</th>
+                                        <th>Booking Id</th>
+                                        <th>User Name</th>
+                                        <th>Vehicle Number</th>
+                                        <th>Parking Name</th>
+                                        <th>Parking Date</th>
+                                        <th>Parking Time</th>
+                                        <th>Amount</th>
 
 
-                                </tr>
 
-                            </thead>
 
-                            <tbody>
 
-                                <?php
+                                    </tr>
 
-                                if (count($getBokingInfo) > 0) {
+                                </thead>
 
-                                    $co = 1;
+                                <tbody>
 
-                                    foreach ($getBokingInfo as $key => $val) {
-                                        if ($val->payment_status == 1) {
-                                            $paymentStatus = "Completed";
-                                        } else {
-                                            $paymentStatus = "Pending";
+                                    <?php
+
+                                    if (count($getBokingInfo) > 0) {
+
+                                        $co = 1;
+
+                                        foreach ($getBokingInfo as $key => $val) {
+                                            if ($val->payment_status == 1) {
+                                                $paymentStatus = "Completed";
+                                            } else {
+                                                $paymentStatus = "Pending";
+                                            }
+                                            $getUserInfs = getUserInfs($val->user_id);
+                                            $getParkingInfos = getParkingInfos($val->parking_id);
+                                            // echo '<pre>';print_r($result);exit;
+                                    ?>
+
+                                            <tr id="<?php echo $val->id; ?>">
+                                                <td><?= $val->id ?></td>
+                                                <td><?= $val->booking_id ?></td>
+
+                                                <td><?= $getUserInfs->name ?></td>
+                                                <td><?= $val->vehicle_num ?></td>
+                                                <td><?= $getParkingInfos->name ?></td>
+                                                <td><?= $val->parking_date ?></td>
+                                                <td><?= $val->parking_start_time ?></td>
+                                                <td>£<?= $val->amount ?></td>
+
+
+
+
+
+                                            </tr>
+
+                                    <?php $co++;
                                         }
-                                        $getUserInfs = getUserInfs($val->user_id);
-                                        $getParkingInfos = getParkingInfos($val->parking_id);
-                                        // echo '<pre>';print_r($result);exit;
-                                ?>
+                                    } ?>
 
-                                        <tr id="<?php echo $val->id; ?>">
-                                            <td><?= $val->id ?></td>
-                                            <td><?= $val->booking_id ?></td>
+                                </tbody>
 
-                                            <td><?= $getUserInfs->name ?></td>
-                                            <td><?=$val->vehicle_num?></td>
-                                            <td><?= $getParkingInfos->name ?></td>
-                                            <td><?= $val->parking_date ?></td>
-                                            <td><?= $val->parking_start_time ?></td>
-                                            <td>£<?= $val->amount ?></td>
+                            </table>
+                        <?php } else { ?>
+                            <table id="dataTable" class="user-list-table table">
+
+                                <thead class="table-light">
+
+                                    <tr>
 
 
 
+                                        <th>Id</th>
+                                        <th>Booking Id</th>
+                                        <th>User Name</th>
+                                        <th>Vehicle Number</th>
+                                        <th>Parking Name</th>
+                                        <th>Parking Date</th>
+                                        <th>Parking Time</th>
+                                        <th>Amount</th>
 
 
-                                        </tr>
 
-                                <?php $co++;
-                                    }
-                                } ?>
 
-                            </tbody>
 
-                        </table>
+                                    </tr>
 
+                                </thead>
+
+                                <tbody>
+
+                                    <?php
+
+                                    if (count($bookingFilter) > 0) {
+
+                                        $co = 1;
+
+                                        foreach ($bookingFilter as $key => $val) {
+                                            if ($val->payment_status == 1) {
+                                                $paymentStatus = "Completed";
+                                            } else {
+                                                $paymentStatus = "Pending";
+                                            }
+                                            $getUserInfs = getUserInfs($val->user_id);
+                                            $getParkingInfos = getParkingInfos($val->parking_id);
+                                            // echo '<pre>';print_r($result);exit;
+                                    ?>
+
+                                            <tr id="<?php echo $val->id; ?>">
+                                                <td><?= $val->id ?></td>
+                                                <td><?= $val->booking_id ?></td>
+
+                                                <td><?= $getUserInfs->name ?></td>
+                                                <td><?= $val->vehicle_num ?></td>
+                                                <td><?= $getParkingInfos->name ?></td>
+                                                <td><?= $val->parking_date ?></td>
+                                                <td><?= $val->parking_start_time ?></td>
+                                                <td>£<?= $val->amount ?></td>
+
+
+
+
+
+                                            </tr>
+
+                                    <?php $co++;
+                                        }
+                                    } ?>
+
+                                </tbody>
+
+                            </table>
+                        <?php } ?>
                     </div>
 
                 </div>

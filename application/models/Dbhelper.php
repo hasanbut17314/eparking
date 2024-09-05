@@ -142,10 +142,11 @@ class Dbhelper extends CI_Model {
     }
 
 
-    public function getBooking($bookdate, $time) {
+    public function getBooking($bookdate, $time, $endTime) {
 
         $this->db->where('parking_date', $bookdate);
         $this->db->where('parking_start_time', $time);
+        $this->db->where('parking_end_time', $endTime);
         $result = $this->db->get('booking_info');
 
         return $result->result_array();
@@ -226,6 +227,19 @@ class Dbhelper extends CI_Model {
         return $result->result();
 
     }
+
+    public function getBokingInfoByUserId($user_id)
+	{
+		// Join bookings and parking tables to fetch bookings for the current parking owner
+		$this->db->select('booking_info.*, parking.*'); // Select relevant fields
+		$this->db->from('booking_info');
+		$this->db->join('parking', 'parking.id = booking_info.parking_id');
+		$this->db->where('parking.user_type', $user_id); // Filter by user_id of parking owner
+
+		// Execute query and return results
+		$query = $this->db->get();
+		return $query->result();
+	}
 
     public function parking_type_master() {
 
@@ -411,7 +425,7 @@ class Dbhelper extends CI_Model {
 
         $this->db->where('booking_id', $id);
 
-        $this->db->delete('booking_info');
+        $this->db->update('booking_info', array('payment_status' => 2));
 
         return ($this->db->affected_rows() != 1) ? false : true;
     }

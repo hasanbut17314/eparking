@@ -1,165 +1,152 @@
 <style>
+  .hero-wrap.hero-wrap-2 .slider-text {
 
-     .hero-wrap.hero-wrap-2 .slider-text{
+    height: 390px !important
+  }
 
-            height: 390px !important
+  .hero-wrap.hero-wrap-2 .overlay {
 
-    }
+    height: 390px !important
+  }
 
-    .hero-wrap.hero-wrap-2 .overlay{
+  .hero-wrap.hero-wrap-2 {
 
-         height: 390px !important
+    height: 390px !important
+  }
 
-    }
+  .accountbtn:hover {
 
-    .hero-wrap.hero-wrap-2{
+    background: #fff !important;
 
-        height: 390px !important
+    border: 1px solid #00aa56 !important;
 
-    }
+    color: #00aa56;
 
-    .accountbtn:hover{
+  }
 
-        background:#fff !important;
+  .createaccount:hover {
 
-        border:1px solid #00aa56 !important;
+    color: #000 !important;
 
-        color: #00aa56;
+  }
 
-    }
+  @media only screen and (max-width: 768px) {
 
-    .createaccount:hover{
+    .login_back_image {
 
-        color: #000 !important;
-
-    }
-
-   @media only screen and (max-width: 768px) {
-
-        .login_back_image{
-
-               display: none !important;
-
-        }
+      display: none !important;
 
     }
 
+  }
 </style>
 
-    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../assets/front/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../assets/front/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
 
-      <div class="overlay"></div>
+  <div class="overlay"></div>
 
-      <div class="container">
+  <div class="container">
 
-        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
 
-          <div class="col-md-9 ftco-animate pb-5">
+      <div class="col-md-9 ftco-animate pb-5">
 
-          	<p class="breadcrumbs"><span class="mr-2"><a href="<?php echo base_url('front');?>">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Login <i class="ion-ios-arrow-forward"></i></span></p>
+        <p class="breadcrumbs"><span class="mr-2"><a href="<?php echo base_url('front'); ?>">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Login <i class="ion-ios-arrow-forward"></i></span></p>
 
-            <h1 class="mb-3 bread">Login</h1>
-
-          </div>
-
-        </div>
+        <h1 class="mb-3 bread">Login</h1>
 
       </div>
 
-    </section>
+    </div>
 
-  <!--================Login Box Area =================-->
+  </div>
 
-  <section class="login_box_area section_gap">
+</section>
 
-    <div class="container">
+<!--================Login Box Area =================-->
 
-      <div class="row">
+<section class="login_box_area section_gap">
 
-        <!--<div class="col-lg-6 login_back_image">-->
+  <div class="container">
 
-        <!--  <div class="login_box_img">-->
+    <div class="row">
 
-        <!--    <img class="img-fluid" src="<?php echo base_url('assets/front/images/login.jpg')?>" alt="">-->
+      <!--<div class="col-lg-6 login_back_image">-->
 
-           
+      <!--  <div class="login_box_img">-->
 
-        <!--  </div>-->
-
-        <!--</div>-->
-
-  
+      <!--    <img class="img-fluid" src="<?php echo base_url('assets/front/images/login.jpg') ?>" alt="">-->
 
 
-        <div class="col-lg-12">
 
-          <div class="login_form_inner" style="    border: 1px solid lightgray;">
+      <!--  </div>-->
 
-            <h3>Log in to enter</h3>
+      <!--</div>-->
 
-            <?php  
 
-                          if($this->session->flashdata('message')){
 
-                             echo '<div class="alert" style="    padding: 0;    color: red;">';
 
-                              echo 'Email Or Password Incorrect.';
+      <div class="col-lg-12">
 
-                            echo '</div>';
+        <div class="login_form_inner" style="    border: 1px solid lightgray;">
 
-                        }
+          <h3>Log in to enter</h3>
 
-                          else{
+          <?php
 
-                        
+          if ($this->session->flashdata('message')) {
 
-                          }
+            echo '<div class="alert" style="    padding: 0;    color: red;">';
 
-                      ?>
+            echo 'Email Or Password Incorrect.';
 
-                        <form class="row login_form" action="<?= base_url('front/saveRegisterData')?>" method="post" id="contactForm" >
+            echo '</div>';
+          } else {
+          }
 
-                        <div class="col-md-12 form-group">
+          ?>
 
-                       <select class="form-control" id="options" name="options" required>
-                        <option value="1">Normal User</option>
-                        <option value="2">Parking Owner</option>
-                       </select>
+          <form class="row login_form" action="<?= base_url('front/saveRegisterData') ?>" method="post" id="contactForm">
 
-                        </div>
-                        <div class="col-md-12 form-group">
+            <div class="col-md-12 form-group">
 
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Username" required="">
+              <select class="form-control" id="options" name="options" required>
+                <option value="1">Normal User</option>
+                <option value="2">Parking Owner</option>
+              </select>
 
-                            </div>
+            </div>
+            <div class="col-md-12 form-group">
 
-                        <div class="col-md-12 form-group">
+              <input type="text" class="form-control" id="name" name="name" placeholder="Enter Username" required="">
 
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required="">
+            </div>
 
-                        </div>
+            <div class="col-md-12 form-group">
 
-                        <div class="col-md-12 form-group">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required="">
 
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required="">
+            </div>
 
-                        </div>
+            <div class="col-md-12 form-group">
+
+              <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required="">
+
+            </div>
 
 
 
 
 
-<div class="col-md-12 form-group">
+            <div class="col-md-12 form-group">
 
-  <button type="submit" value="submit" class="primary-btn accountbtn"style="    background: linear-gradient(90deg, #00aa56 0%, #00aa56 100%);    margin-bottom: 20px;border-radius: 8px;">Submit</button>
-  <a class="createaccount" href="<?= base_url('front/login')?>" style="color: #00aa56 ;    font-size: 13px;">Login Here?</a>
- 
-</div>
+              <button type="submit" value="submit" class="primary-btn accountbtn" style="    background: linear-gradient(90deg, #00aa56 0%, #00aa56 100%);    margin-bottom: 20px;border-radius: 8px;">Submit</button>
+              <a class="createaccount" href="<?= base_url('front/login') ?>" style="color: #00aa56 ;    font-size: 13px;">Login Here?</a>
 
-</form>
-        
+            </div>
 
-          </div>
+          </form>
+
 
         </div>
 
@@ -167,29 +154,30 @@
 
     </div>
 
-  </section>
+  </div>
 
-  <!--================End Login Box Area =================-->
+</section>
+
+<!--================End Login Box Area =================-->
 
 
 
 <style type="text/css">
-
   .section_gap {
 
     padding: 100px 0;
 
-}
+  }
 
-.login_box_area .login_box_img {
+  .login_box_area .login_box_img {
 
     margin-right: -30px;
 
     position: relative;
 
-}
+  }
 
-.login_box_area .login_box_img:before {
+  .login_box_area .login_box_img:before {
 
     position: absolute;
 
@@ -207,15 +195,15 @@
 
     opacity: .5;
 
-}
+  }
 
-.login_box_area .login_box_img img {
+  .login_box_area .login_box_img img {
 
     width: 100%;
 
-}
+  }
 
-.login_box_area .login_box_img .hover {
+  .login_box_area .login_box_img .hover {
 
     position: absolute;
 
@@ -229,9 +217,9 @@
 
     transform: translateY(-50%);
 
-}
+  }
 
-.login_box_area .login_box_img .hover h4 {
+  .login_box_area .login_box_img .hover h4 {
 
     font-size: 24px;
 
@@ -239,9 +227,9 @@
 
     margin-bottom: 15px;
 
-}
+  }
 
-.login_box_area .login_box_img .hover p {
+  .login_box_area .login_box_img .hover p {
 
     max-width: 380px;
 
@@ -249,9 +237,9 @@
 
     color: #fff;
 
-}
+  }
 
-.login_box_area .login_box_img .hover .primary-btn {
+  .login_box_area .login_box_img .hover .primary-btn {
 
     border-radius: 0px;
 
@@ -259,9 +247,9 @@
 
     text-transform: uppercase;
 
-}
+  }
 
-.primary-btn {
+  .primary-btn {
 
     position: relative;
 
@@ -291,11 +279,11 @@
 
     transition: all 0.3s ease 0s;
 
-        background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+    background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
 
-}
+  }
 
-.login_form_inner {
+  .login_form_inner {
 
     box-shadow: 0px 10px 30px 0px #00aa5614;
 
@@ -305,9 +293,9 @@
 
     padding-top: 115px;
 
-}
+  }
 
-.login_form_inner h3 {
+  .login_form_inner h3 {
 
     color: #222222;
 
@@ -317,17 +305,17 @@
 
     margin-bottom: 30px;
 
-}
+  }
 
-.login_form_inner .login_form {
+  .login_form_inner .login_form {
 
     max-width: 385px;
 
     margin: auto;
 
-}
+  }
 
-.login_form .form-group input {
+  .login_form .form-group input {
 
     height: 54px;
 
@@ -341,9 +329,9 @@
 
     box-shadow: none;
 
-}
+  }
 
-.login_form .form-group .primary-btn {
+  .login_form .form-group .primary-btn {
 
     display: block;
 
@@ -357,9 +345,9 @@
 
     border: none;
 
-}
+  }
 
-.primary-btn {
+  .primary-btn {
 
     position: relative;
 
@@ -389,10 +377,7 @@
 
     transition: all 0.3s ease 0s;
 
-        background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
+    background: linear-gradient(90deg, #ffba00 0%, #ff6c00 100%);
 
-}
-
-
-
-</style>  
+  }
+</style>

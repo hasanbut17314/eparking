@@ -524,6 +524,7 @@
 
             <input type="hidden" id="parkingtime<?= $value->id ?>" value="<?= $parking_time; ?>">
             <input type="hidden" id="parkingdate<?= $value->id ?>" value="<?= $parking_date; ?>">
+            <input type="hidden" id="parking_end_time<?= $value->id ?>" value="<?= $parking_end_time; ?>" >
             <input type="hidden" id="parkingprice<?= $value->id ?>" value="<?= $value->price; ?>">
             <input type="hidden" id="pkOwnerId<?= $value->id ?>" value="<?= $value->user_type; ?>">
             <div class="col-md-3">
@@ -635,6 +636,7 @@
    $(document).on("click", "#confirmBookingBtn", function() {
       var data_id = $(this).data('id');
       var parkingtime = $("#parkingtime" + data_id).val();
+      var parking_end_time = $("#parking_end_time" + data_id).val();
       var parkingdate = $("#parkingdate" + data_id).val();
       var parkingprice = $("#parkingprice" + data_id).val();
       var vehicleNumber = $('#vehicleNumber').val();
@@ -647,6 +649,7 @@
          data: {
             "data_id": data_id,
             "parkingtime": parkingtime,
+            "parking_end_time": parking_end_time,
             "parkingdate": parkingdate,
             "parkingprice": parkingprice,
             "vehicleNumber": vehicleNumber,
