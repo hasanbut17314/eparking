@@ -3,7 +3,6 @@
 date_default_timezone_set('Asia/Kolkata');
 
 defined('BASEPATH') or exit('No direct script access allowed');
-use SendGrid\Mail\Mail;
 
 class Front extends CI_Controller
 {
@@ -125,27 +124,40 @@ class Front extends CI_Controller
         redirect(BASE_URL . "front/otpverify");
     }
 
-    function sendMail($otp, $email, $customerId, $name)
+    public function sendMail($otp, $email, $customerId, $name)
     {
-        $emailContent = "<p>Verify your account! Your OTP is <strong>{$otp}</strong></p>";
+        $config = array(
+            'protocol'  => 'smtp',
+            'smtp_host' => 'smtp.elasticemail.com',
+            'smtp_port' => 2525,
+            'smtp_user' => 'hasanbut17314@gmail.com', // Your Elastic Email username
+            'smtp_pass' => 'EAA2C064EA03DAA110323AF2E9901B5AA191', // Your Elastic Email password
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'newline'   => "\r\n",
+            'wordwrap'  => TRUE
+        );
 
-        $email = new Mail();
-        $email->setFrom("no-reply@eparking.com", "E-Parking");
-        $email->setSubject("Your Security Code");
-        $email->addTo($email, $name);
-        $email->addContent("text/html", $emailContent);
+        // Load and initialize email library with the config
+        $this->load->library('email', $config);
+        $this->email->initialize($config);
 
-        $sendgrid = new \SendGrid('YOUR_SENDGRID_API_KEY');
-        try {
-            $response = $sendgrid->send($email);
-            if ($response->statusCode() == 202) {
-                redirect('front/otpverify?cus=' . $customerId);
-            }
-        } catch (Exception $e) {
-            log_message('error', 'Caught exception: ' . $e->getMessage());
-            redirect('front/login');
+        // Set email parameters
+        $this->email->from('hasanbut17314@gmail.com', 'E-Parking');
+        $this->email->to($email);
+        $this->email->subject('Your OTP Code');
+        $this->email->message("<p>Dear {$name},</p><p>Your OTP code is <strong>{$otp}</strong>.</p><p>Use this code to complete your registration.</p>");
+
+        // Send the email
+        if ($this->email->send()) {
+            redirect('front/otpverify?cus=' . $customerId);
+        } else {
+            // Handle the error, e.g., show the error message
+            show_error($this->email->print_debugger());
         }
     }
+
+
 
     public function otpverify()
     {
