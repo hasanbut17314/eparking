@@ -116,25 +116,6 @@
                                                 </div>
                                             </a>
                                         </div>
-                                        <div class="col-xl-3 col-sm-6 col-12 mb-2 mb-sm-0">
-                                            <a>
-                                                <div class="media">
-                                                    <div class="avatar bg-light-danger mr-2">
-                                                        <div class="avatar-content">
-                                                            <i data-feather="trending-up" class="avatar-icon"></i>
-                                                        </div>
-                                                    </div>
-                                                    <?php
-                                                    $admin_id = $this->session->userdata('admin_id');
-                                                    $getBooking =  getBooking();
-                                                    ?>
-                                                    <div class="media-body my-auto">
-                                                        <h4 class="font-weight-bolder mb-0">12</h4>
-                                                        <p class="card-text font-small-3 mb-0">Website Visits</p>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
                                         <div class="col-xl-3 col-sm-6 col-12">
                                             <a>
                                                 <div class="media">

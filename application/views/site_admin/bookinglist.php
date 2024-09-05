@@ -91,18 +91,13 @@
                 <!-- list and filter start -->
 
                 <div class="card dt">
-
-
-
                     <div class="card-datatable table-responsive pt-0">
-                        <?php if ($this->session->userData('user_type') !== 2) { ?>
+                        <?php if ($this->session->userData('user_type') != 2) { ?>
                             <table id="dataTable" class="user-list-table table">
 
                                 <thead class="table-light">
 
                                     <tr>
-
-
 
                                         <th>Id</th>
                                         <th>Booking Id</th>
@@ -112,10 +107,6 @@
                                         <th>Parking Date</th>
                                         <th>Parking Time</th>
                                         <th>Amount</th>
-
-
-
-
 
                                     </tr>
 
