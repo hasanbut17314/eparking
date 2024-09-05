@@ -120,44 +120,82 @@ class Front extends CI_Controller
 
         $insert_id = $this->dbhelper->saveRegisterData($data);
 
-        $this->sendMail($mobile_otp, $email, $insert_id, $name);
+        $this->sendEmail($mobile_otp, $email, $insert_id, $name);
         redirect(BASE_URL . "front/otpverify");
     }
 
-    public function sendMail($otp, $email, $customerId, $name)
+    public function sendEmail($otp, $email, $customerId, $name)
     {
-        $config = array(
-            'protocol'  => 'smtp',
-            'smtp_host' => 'smtp.elasticemail.com',
-            'smtp_port' => 2525,
-            'smtp_user' => 'hasanbut17314@gmail.com', // Your Elastic Email username
-            'smtp_pass' => 'EAA2C064EA03DAA110323AF2E9901B5AA191', // Your Elastic Email password
-            'mailtype'  => 'html',
-            'charset'   => 'utf-8',
-            'newline'   => "\r\n",
-            'wordwrap'  => TRUE
-        );
+        $this->load->library('mail');
+        $to = $email;
+        $subject = 'Verification Code';
+        $message = '
+        <html>
+            <head>
+                <style>
+                    .email-container {
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        line-height: 1.6;
+                        color: #333;
+                        max-width: 600px;
+                        margin: auto;
+                        padding: 20px;
+                        background-color: #f4f4f4;
+                        border-radius: 10px;
+                    }
+                    .header {
+                        text-align: center;
+                        background-color: #4CAF50;
+                        padding: 10px;
+                        border-radius: 10px 10px 0 0;
+                        color: white;
+                        font-size: 18px;
+                    }
+                    .content {
+                        background-color: #fff;
+                        padding: 20px;
+                        border-radius: 0 0 10px 10px;
+                        box-shadow: 0px 0px 5px #ccc;
+                    }
+                    .otp {
+                        font-weight: bold;
+                        color: #4CAF50;
+                        font-size: 16px;
+                    }
+                    .footer {
+                        text-align: center;
+                        font-size: 12px;
+                        color: #aaa;
+                        margin-top: 20px;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="email-container">
+                    <div class="header">
+                        Eparking - Verification Code
+                    </div>
+                    <div class="content">
+                        <p>Hi <strong>' . $name . '</strong>,</p>
+                        <p>Your OTP for verification is:</p>
+                        <p class="otp">' . $otp . '</p>
+                        <p>Please use this code to complete your registration. This OTP is valid for a limited time.</p>
+                    </div>
+                    <div class="footer">
+                        &copy; 2024 Eparking. All rights reserved.
+                    </div>
+                </div>
+            </body>
+        </html>
+    ';
 
-        // Load and initialize email library with the config
-        $this->load->library('email', $config);
-        $this->email->initialize($config);
-
-        // Set email parameters
-        $this->email->from('hasanbut17314@gmail.com', 'E-Parking');
-        $this->email->to($email);
-        $this->email->subject('Your OTP Code');
-        $this->email->message("<p>Dear {$name},</p><p>Your OTP code is <strong>{$otp}</strong>.</p><p>Use this code to complete your registration.</p>");
-
-        // Send the email
-        if ($this->email->send()) {
+        if ($this->mail->sendMail($to, $subject, $message)) {
             redirect('front/otpverify?cus=' . $customerId);
         } else {
-            // Handle the error, e.g., show the error message
-            show_error($this->email->print_debugger());
+            echo 'Error Sending email';
         }
     }
-
-
 
     public function otpverify()
     {

@@ -71,7 +71,6 @@
 
 							<div class="form-group">
 								<?php
-								// Generate time options in 24-hour format with 15-minute intervals
 								$timeOption = [];
 								for ($h = 0; $h < 24; $h++) {
 									for ($m = 0; $m < 60; $m += 15) {
