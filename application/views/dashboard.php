@@ -1,6 +1,6 @@
 <style type="text/css">
     .toast-container {
-        background-color: #fffff !important;
+        background-color: #ffffff !important;
     }
 </style>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/app-assets/css/bootstrap.css') ?>">
